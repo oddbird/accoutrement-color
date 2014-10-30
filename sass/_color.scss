@@ -1,0 +1,52 @@
+// Color Toolkit
+// =============
+
+@import "compass/utilities/color/contrast";
+
+
+// Config
+// ------
+
+$colors: () !default;
+
+
+// Colors
+// ------
+// Add colors to a pallette
+@mixin colors(
+  $map
+) {
+  $colors: map-merge($colors, $map) !global;
+}
+
+
+// Color
+// -----
+// Access your color pallette
+@function color($color) {
+  // Parse arguments
+  $color: map-get($colors, $color) or $color;
+  $base: nth($color, 1);
+  $adjust: if(length($color) > 1, nth($color, 2), ());
+
+  // Recursive check
+  $color: if(map-has-key($colors, $base), color($base), $base);
+
+  // Adjustments
+  @each $function, $values in $adjust {
+    @if function-exists($function) {
+      $color: call($function, $color, $values...)
+    } @else {
+      @warn "#{$function} is not a valid color function.";
+    }
+  }
+
+  @return $color;
+}
+
+
+// Contrast
+// --------
+@function contrast($color) {
+  @return contrast-color(color($color));
+}
