@@ -1,0 +1,22 @@
+{
+  "name": "accoutrement-color",
+  "version": "1.0.0",
+  "description": "Sass string utilities.",
+  "homepage": "https://github.com/oddbird/accoutrement-color",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oddbird/accoutrement-color.git"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "sass-true": "^2.0.0-beta.1"
+  },
+  "author": "Eric M Suzanne <eric@oddbird.net>",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "bugs": {
+    "url": "https://github.com/oddbird/accoutrement-color/issues"
+  }
+}

@@ -1,0 +1,165 @@
+// Arrow Tests
+// ===========
+
+@import '../../node_modules/sass-true/sass/true';
+@import '../../sass/color';
+
+
+$colors: (
+  'blue': hsl(195, 85%, 62%),
+  'orange': hsl(24, 100%, 62%),
+  'red': hsl(0, 85%, 62%),
+
+  simple: #969,
+  primary: 'red',
+  secondary: primary (tint: 30%, desaturate: 25%),
+  alpha: simple (rgba: .5),
+  wtf: secondary (adjust-hue: 24deg),
+  hello: simple,
+
+  dark: #000,
+  light: #fff,
+
+  contrast-dark: dark,
+  contrast-light: light,
+);
+
+
+// colors (mixin)
+@include test-module('colors [mixin]') {
+  @include test('Update color map') {
+    $test: (tuesday: 'orange');
+    $expect: $colors;
+
+    @include assert-false(map-get($colors, tuesday),
+      'There is no color named tuesday.');
+
+    @include colors($test);
+
+    @include assert-true(map-get($colors, tuesday),
+      'There is now a color named tuesday.');
+
+    @include assert-equal($colors, map-merge($expect, $test),
+      'The $colors map has been updated.');
+  }
+}
+
+// color [function]
+@include test-module('color [function]') {
+  @include test('Handle named color') {
+    $test: color(simple);
+    $expect: map-get($colors, simple);
+    @include assert-equal($test, $expect,
+      'Returns simple color based on styleguide keyword');
+  }
+
+  @include test('Handle referenced color') {
+    $test: color(primary);
+    $expect: map-get($colors, 'red');
+    @include assert-equal($test, $expect,
+      'Returns color based on referential styleguide keyword');
+  }
+
+  @include test('Handle adjusted color') {
+    $test: color(secondary);
+    $expect: desaturate(tint(map-get($colors, 'red'), 30%), 25%);
+    @include assert-equal($test, $expect,
+      'Returns color based on self-referential keyword and adjustments');
+  }
+
+  @include test('Handle complex nesting of colors') {
+    $test: color(wtf);
+    $expect: adjust-hue(desaturate(tint(map-get($colors, 'red'), 30%), 25%), 24deg);
+    @include assert-equal($test, $expect,
+      'Returns color based on multiple self-referential keywords and adjustments');
+  }
+}
+
+
+// Tint [function]
+@include test-module('tint [function]') {
+  @include test('Adjusts the tint of a color') {
+    $test: tint(primary, 25%);
+    $expect: mix(#fff, color(primary), 25%);
+
+    @include assert-equal($test, $expect,
+      'Returns a color mixed with white at a given weight.');
+  }
+}
+
+
+// Shade [function]
+@include test-module('shade [function]') {
+  @include test('Adjusts the shade of a color') {
+    $test: shade(primary, 25%);
+    $expect: mix(#000, color(primary), 25%);
+
+    @include assert-equal($test, $expect,
+      'Returns a color mixed with black at a given weight.');
+  }
+}
+
+
+// Brightness [function]
+@include test-module('_brightness [function]') {
+  @include test('Find the brightness of a color') {
+    $test: brightness(primary);
+    $expect: 49.0154%;
+
+    @include assert-equal($test, $expect,
+      'Calculates the brightness of a color.');
+  }
+}
+
+
+// Contrast [function]
+@include test-module('contrast [function]') {
+  @include test('Dark on light') {
+    $test: contrast(#eee);
+    $expect: color(contrast-dark);
+
+    @include assert-equal($test, $expect,
+      'Returns a dark color to contrast a light one.');
+  }
+
+  @include test('Light on dark') {
+    $test: contrast(primary);
+    $expect: color(contrast-light);
+
+    @include assert-equal($test, $expect,
+      'Returns a light color to contrast a dark one.');
+  }
+}
+
+
+// Contrasted [mixin]
+@include test-module('contrasted [mixin]') {
+  @include test('Dark on light') {
+    @include assert('Use a dark color on a light background.') {
+      @include input {
+        @include contrasted(#eee);
+      }
+
+      @include expect {
+        background-color: #eee;
+        color: color(contrast-dark);
+      }
+    }
+  }
+
+  @include test('Light on dark') {
+    @include assert('Use a light color on a dark background.') {
+      @include input {
+        @include contrasted(primary);
+      }
+
+      @include expect {
+        background-color: color(primary);
+        color: color(contrast-light);
+      }
+    }
+  }
+}
+
+
+@include report;

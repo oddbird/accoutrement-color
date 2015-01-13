@@ -1,18 +1,18 @@
 // Color Toolkit
 // =============
 
-@import "compass/utilities/color/contrast";
 
+$colors: (
+  dark: #000,
+  light: #fff,
 
-// Config
-// ------
-
-$colors: () !default;
+  contrast-dark: dark,
+  contrast-light: light,
+) !default;
 
 
 // Colors
 // ------
-// Add colors to a pallette
 @mixin colors(
   $map
 ) {
@@ -22,7 +22,6 @@ $colors: () !default;
 
 // Color
 // -----
-// Access your color pallette
 @function color($color) {
   // Parse arguments
   $color: map-get($colors, $color) or $color;
@@ -33,9 +32,9 @@ $colors: () !default;
   $color: if(map-has-key($colors, $base), color($base), $base);
 
   // Adjustments
-  @each $function, $values in $adjust {
+  @each $function, $value in $adjust {
     @if function-exists($function) {
-      $color: call($function, $color, $values...)
+      $color: call($function, $color, $value);
     } @else {
       @warn "#{$function} is not a valid color function.";
     }
@@ -45,8 +44,76 @@ $colors: () !default;
 }
 
 
+// Tint
+// ----
+@function tint(
+  $color,
+  $percentage
+) {
+  $color: color($color);
+
+  @return mix(#fff, $color, $percentage);
+}
+
+
+// Shade
+// -----
+@function shade(
+  $color,
+  $percentage
+) {
+  $color: color($color);
+
+  @return mix(#000, $color, $percentage);
+}
+
+
+// Brightness
+// ----------
+@function brightness(
+  $color
+) {
+  $color: color($color);
+
+  $_red: red($color) * .299;
+  $_green: green($color) * .587;
+  $_blue: blue($color) * .114;
+
+  @return ($_red + $_green + $_blue) / 255 * 100%;
+}
+
+
 // Contrast
 // --------
-@function contrast($color) {
-  @return contrast-color(color($color));
+@function contrast(
+  $color,
+  $dark: contrast-dark,
+  $light: contrast-light
+) {
+  $color: color($color);
+  $dark: color($dark);
+  $light: color($light);
+
+  $_color-brightness: brightness($color);
+  $_dark-text-brightness: brightness($dark);
+  $_light-text-brightness: brightness($light);
+
+  $_light-contrast: abs($_color-brightness - $_light-text-brightness);
+  $_dark-contrast: abs($_color-brightness - $_dark-text-brightness);
+
+  @return if($_light-contrast > $_dark-contrast, $light, $dark);
+}
+
+
+// Contrasted
+// ----------
+@mixin contrasted(
+  $background,
+  $dark: contrast-dark,
+  $light: contrast-light
+) {
+  $background: color($background);
+
+  background-color: $background;
+  color: contrast($background, $dark, $light);
 }
