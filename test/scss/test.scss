@@ -129,6 +129,22 @@ $colors: (
     @include assert-equal($test, $expect,
       'Returns a light color to contrast a dark one.');
   }
+
+  @include test('Default light fallback') {
+    $test: contrast(#000, none, none);
+    $expect: #fff;
+
+    @include assert-equal($test, $expect,
+      'Returns white for light contrast when none is given.');
+  }
+
+  @include test('Default dark fallback') {
+    $test: contrast(#fff, none, none);
+    $expect: #000;
+
+    @include assert-equal($test, $expect,
+      'Returns black for dark contrast when none is given.');
+  }
 }
 
 

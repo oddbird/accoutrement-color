@@ -94,6 +94,14 @@ $colors: (
   $dark: color($dark);
   $light: color($light);
 
+  @if not(type-of($dark) == color) {
+    $dark: #000;
+  }
+
+  @if not(type-of($light) == color) {
+    $light: #fff;
+  }
+
   $_color-brightness: brightness($color);
   $_dark-text-brightness: brightness($dark);
   $_light-text-brightness: brightness($light);
