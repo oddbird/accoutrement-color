@@ -10,145 +10,149 @@ $colors: (
   'orange': hsl(24, 100%, 62%),
   'red': hsl(0, 85%, 62%),
 
-  simple: #969,
-  primary: 'red',
-  secondary: primary (tint: 30%, desaturate: 25%),
-  alpha: simple (rgba: .5),
-  wtf: secondary (adjust-hue: 24deg),
-  hello: simple,
+  'simple': #969,
+  'primary': 'red',
+  'secondary': 'primary' (tint: 30%, desaturate: 25%),
+  'alpha': 'simple' (rgba: .5),
+  'wtf': 'secondary' (adjust-hue: 24deg),
+  'hello': 'simple',
 
-  dark: #000,
-  light: #fff,
+  'dark': #111,
+  'light': #eee,
 
-  contrast-dark: dark,
-  contrast-light: light,
+  'contrast-dark': 'dark',
+  'contrast-light': 'light',
 );
 
 
-// colors (mixin)
-@include test-module('colors [mixin]') {
-  @include test('Update color map') {
-    $test: (tuesday: 'orange');
-    $expect: $colors;
+// Add Color [mixin]
+// -----------------
+@include test-module('Add Color [mixin]') {
+  @include test('Update $color map') {
+    $test: ('tuesday': 'orange');
 
-    @include assert-false(map-get($colors, tuesday),
+    @include assert-false(
+      map-get($colors, 'tuesday'),
       'There is no color named tuesday.');
 
-    @include colors($test);
+    @include add-color($test);
 
-    @include assert-true(map-get($colors, tuesday),
+    @include assert-true(
+      map-get($colors, 'tuesday'),
       'There is now a color named tuesday.');
 
-    @include assert-equal($colors, map-merge($expect, $test),
+    @include assert-equal(
+      $colors,
+      map-merge($colors, $test),
       'The $colors map has been updated.');
   }
 }
 
-// color [function]
-@include test-module('color [function]') {
-  @include test('Handle named color') {
-    $test: color(simple);
-    $expect: map-get($colors, simple);
-    @include assert-equal($test, $expect,
+
+// Color [function]
+// ----------------
+@include test-module('Color [function]') {
+  @include test('Named color') {
+    @include assert-equal(
+      color('simple'),
+      map-get($colors, 'simple'),
       'Returns simple color based on styleguide keyword');
   }
 
-  @include test('Handle referenced color') {
-    $test: color(primary);
-    $expect: map-get($colors, 'red');
-    @include assert-equal($test, $expect,
+  @include test('Referenced color') {
+    @include assert-equal(
+      color('primary'),
+      map-get($colors, 'red'),
       'Returns color based on referential styleguide keyword');
   }
 
-  @include test('Handle adjusted color') {
-    $test: color(secondary);
-    $expect: desaturate(tint(map-get($colors, 'red'), 30%), 25%);
-    @include assert-equal($test, $expect,
+  @include test('Adjusted color') {
+    @include assert-equal(
+      color('secondary'),
+      desaturate(tint(map-get($colors, 'red'), 30%), 25%),
       'Returns color based on self-referential keyword and adjustments');
   }
 
-  @include test('Handle complex nesting of colors') {
-    $test: color(wtf);
-    $expect: adjust-hue(desaturate(tint(map-get($colors, 'red'), 30%), 25%), 24deg);
-    @include assert-equal($test, $expect,
-      'Returns color based on multiple self-referential keywords and adjustments');
+  @include test('Complex nesting of colors') {
+    @include assert-equal(
+      color('wtf'),
+      adjust-hue(desaturate(tint(map-get($colors, 'red'), 30%), 25%), 24deg),
+      'Returns color based on multiple keywords and adjustments');
   }
 }
 
 
 // Tint [function]
-@include test-module('tint [function]') {
+// ---------------
+@include test-module('Tint [function]') {
   @include test('Adjusts the tint of a color') {
-    $test: tint(primary, 25%);
-    $expect: mix(#fff, color(primary), 25%);
-
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      tint('primary', 25%),
+      mix(#fff, color('primary'), 25%),
       'Returns a color mixed with white at a given weight.');
   }
 }
 
 
 // Shade [function]
-@include test-module('shade [function]') {
+// ----------------
+@include test-module('Shade [function]') {
   @include test('Adjusts the shade of a color') {
-    $test: shade(primary, 25%);
-    $expect: mix(#000, color(primary), 25%);
-
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      shade('primary', 25%),
+      mix(#000, color('primary'), 25%),
       'Returns a color mixed with black at a given weight.');
   }
 }
 
 
 // Brightness [function]
-@include test-module('_brightness [function]') {
+// ---------------------
+@include test-module('Brightness [function]') {
   @include test('Find the brightness of a color') {
-    $test: brightness(primary);
-    $expect: 49.0154%;
-
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      brightness('primary'),
+      49.0154%,
       'Calculates the brightness of a color.');
   }
 }
 
 
 // Contrast [function]
-@include test-module('contrast [function]') {
+// -------------------
+@include test-module('Contrast [function]') {
   @include test('Dark on light') {
-    $test: contrast(#eee);
-    $expect: color(contrast-dark);
-
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      contrast(#eee),
+      color('contrast-dark'),
       'Returns a dark color to contrast a light one.');
   }
 
   @include test('Light on dark') {
-    $test: contrast(primary);
-    $expect: color(contrast-light);
-
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      contrast('dark'),
+      color('contrast-light'),
       'Returns a light color to contrast a dark one.');
   }
 
   @include test('Default light fallback') {
-    $test: contrast(#000, none, none);
-    $expect: #fff;
-
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      contrast(#000, 'none', 'none'),
+      #fff,
       'Returns white for light contrast when none is given.');
   }
 
   @include test('Default dark fallback') {
-    $test: contrast(#fff, none, none);
-    $expect: #000;
-
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      contrast(#fff, 'none', 'none'),
+      #000,
       'Returns black for dark contrast when none is given.');
   }
 }
 
 
 // Contrasted [mixin]
+// ------------------
 @include test-module('contrasted [mixin]') {
   @include test('Dark on light') {
     @include assert('Use a dark color on a light background.') {
@@ -158,7 +162,7 @@ $colors: (
 
       @include expect {
         background-color: #eee;
-        color: color(contrast-dark);
+        color: color('contrast-dark');
       }
     }
   }
@@ -166,12 +170,12 @@ $colors: (
   @include test('Light on dark') {
     @include assert('Use a light color on a dark background.') {
       @include input {
-        @include contrasted(primary);
+        @include contrasted('dark');
       }
 
       @include expect {
-        background-color: color(primary);
-        color: color(contrast-light);
+        background-color: color('dark');
+        color: color('contrast-light');
       }
     }
   }

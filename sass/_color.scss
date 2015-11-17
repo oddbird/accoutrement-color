@@ -2,18 +2,12 @@
 // =============
 
 
-$colors: (
-  dark: #000,
-  light: #fff,
-
-  contrast-dark: dark,
-  contrast-light: light,
-) !default;
+$colors: () !default;
 
 
-// Colors
-// ------
-@mixin colors(
+// Add Colors
+// ----------
+@mixin add-color(
   $map
 ) {
   $colors: map-merge($colors, $map) !global;
@@ -75,11 +69,11 @@ $colors: (
 ) {
   $color: color($color);
 
-  $_red: red($color) * .299;
-  $_green: green($color) * .587;
-  $_blue: blue($color) * .114;
+  $red: red($color) * .299;
+  $green: green($color) * .587;
+  $blue: blue($color) * .114;
 
-  @return ($_red + $_green + $_blue) / 255 * 100%;
+  @return ($red + $green + $blue) / 255 * 100%;
 }
 
 
@@ -87,29 +81,29 @@ $colors: (
 // --------
 @function contrast(
   $color,
-  $dark: contrast-dark,
-  $light: contrast-light
+  $dark: 'contrast-dark',
+  $light: 'contrast-light'
 ) {
   $color: color($color);
   $dark: color($dark);
   $light: color($light);
 
-  @if not(type-of($dark) == color) {
+  @if not(type-of($dark) == 'color') {
     $dark: #000;
   }
 
-  @if not(type-of($light) == color) {
+  @if not(type-of($light) == 'color') {
     $light: #fff;
   }
 
-  $_color-brightness: brightness($color);
-  $_dark-text-brightness: brightness($dark);
-  $_light-text-brightness: brightness($light);
+  $color-brightness: brightness($color);
+  $dark-text-brightness: brightness($dark);
+  $light-text-brightness: brightness($light);
 
-  $_light-contrast: abs($_color-brightness - $_light-text-brightness);
-  $_dark-contrast: abs($_color-brightness - $_dark-text-brightness);
+  $light-contrast: abs($color-brightness - $light-text-brightness);
+  $dark-contrast: abs($color-brightness - $dark-text-brightness);
 
-  @return if($_light-contrast > $_dark-contrast, $light, $dark);
+  @return if($light-contrast > $dark-contrast, $light, $dark);
 }
 
 
