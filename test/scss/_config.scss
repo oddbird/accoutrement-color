@@ -32,4 +32,12 @@
       adjust-hue(desaturate(tint(map-get($colors, 'red'), 30%), 25%), 24deg),
       'Returns color based on multiple keywords and adjustments');
   }
+
+  @include test('Multiple adjustment function arguments') {
+    $adjust: ('contrast': (#999, #666, #333));
+    @include assert-equal(
+      color(#fcc $adjust),
+      #333,
+      'Handles multiple arguments to color-adjustment function');
+  }
 }

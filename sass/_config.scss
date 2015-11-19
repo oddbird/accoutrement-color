@@ -2,6 +2,12 @@
 // ============
 
 
+////
+// Configure and access your color palette.
+// @group config
+////
+
+
 // Color Palette
 // -------------
 /// Define your color palette with a `name`, `value`,
@@ -9,8 +15,8 @@
 /// Colors can reference other colors in the map,
 /// and adjust them using sass color functions
 /// using a `(<function-name>: <args>)` syntax.
-///
-/// @group config
+/// Adjustment functions are called in this format:
+/// `function-name($color-value, $args...)`.
 ///
 /// @example scss - sample color palette
 ///   $colors: (
@@ -30,11 +36,10 @@ $colors: () !default;
 
 // Color
 // -----
-/// Access any color in your palette.
+/// Access any color in your palette,
+/// using the same syntax as the `$colors` map
 ///
-/// @group config
-///
-/// @param {String | list} $color -
+/// @param {String | List} $color -
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
 /// @return {Color} -
@@ -53,7 +58,9 @@ $colors: () !default;
   // Adjustments
   @each $function, $value in $adjust {
     @if function-exists($function) {
-      $color: call($function, $color, $value);
+      // @@@ this works around a libsass bug...
+      $call: join(($function, $color), $value);
+      $color: call($call...);
     } @else {
       @warn "#{$function} is not a valid color function.";
     }
