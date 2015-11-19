@@ -31,5 +31,8 @@
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement-color/issues"
+  },
+  "dependencies": {
+    "mathsass": "^0.9.5"
   }
 }

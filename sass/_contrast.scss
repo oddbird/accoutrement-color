@@ -1,0 +1,172 @@
+// Color Contrast
+// ==============
+
+
+@import '../node_modules/mathsass/dist/math';
+
+
+// WCAG Contrast
+// -------------
+$WCAG-CONTRAST: (
+  'aa-large': 3,
+  'aa': 4.5,
+  'aaa': 7,
+);
+
+
+// Contrast Ratio
+// --------------
+$contrast-ratio: 'aa' !default;
+
+
+// Luminance
+// ---------
+// http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+@function luminance(
+  $color
+) {
+  $color: color($color);
+  $luminance: 0;
+
+  @if (type-of($color) != 'color') {
+    @error '`#{$color}` is not a color.';
+  }
+
+  @each $component in 'red' 'green' 'blue' {
+    $value: call($component, $color) / 255;
+
+    @if ($value < 0.03928) {
+      $value: $value / 12.92;
+    } @else {
+      $value: pow((($value + 0.055) / 1.055), 2.4);
+    }
+
+    @if ($component == 'red') {
+      $value: $value * 0.2126;
+    } @else if ($component == 'green') {
+      $value: $value * 0.7152;
+    } @else {
+      $value: $value * 0.0722;
+    }
+
+    $luminance: $luminance + $value;
+  }
+
+  @return $luminance;
+}
+
+
+// Contrast Ratio
+// --------------
+// http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+@function contrast-ratio(
+  $base,
+  $contrast
+) {
+  @if (type-of($base) != 'number' ){
+    $base: luminance($base);
+    $contrast: luminance($contrast);
+  }
+
+  $darker: $base;
+  $lighter: $contrast;
+
+  @if $base > $contrast {
+    $lighter: $base;
+    $darker: $contrast;
+  }
+
+  @return ($lighter + 0.05) / ($darker + 0.05);
+}
+
+
+// Contrast
+// --------
+/// For any color, select the best contrast among a set of options.
+/// For best results, pass a combination of light and dark colors
+/// to contrast against.
+///
+/// @group contrast
+///
+/// @param {String | list} $color -
+///   The name of a color in your palette,
+///   with optional adjustments in the form of `(<function-name>: <args>)`.
+/// @param {Arglist} $options [#000, #fff] -
+///   Colors to contrast against.
+///   Will use `contrast-light` and `contrast-dark` as defaults
+///   if they are defined in your color palette.
+/// @return {Color} -
+///   Whichever option has the highest contrast-ratio to `$color`.
+@function contrast(
+  $color,
+  $options...
+) {
+  // Establish default options if they are missing
+  @if length($options) == 0 {
+    $options: append($options, map-get($colors, 'contrast-light') or #fff);
+    $options: append($options, map-get($colors, 'contrast-dark') or #000);
+  } @else if length($options) == 1 {
+    @error 'Provide at least two contrasting color options for `contrast()`';
+  }
+
+  // Get the colors and their contrasts
+  $color-val: color($color);
+  $color-lum: luminance($color-val);
+  $color-list: ();
+  $contrast-list: ();
+
+  @each $item in $options {
+    $item: color($item);
+    $luminance: luminance($item);
+    $contrast: contrast-ratio($color-lum, $luminance);
+
+    $color-list: append($color-list, $item);
+    $contrast-list: append($contrast-list, $contrast);
+  }
+
+  // Find the best results
+  $best-ratio: max($contrast-list...);
+  $best-color: nth($color-list, index($contrast-list, $best-ratio));
+
+  // Check results against standards
+  @if $contrast-ratio {
+    $ratio: map-get($WCAG-CONTRAST, $contrast-ratio) or $contrast-ratio;
+
+    @if (type-of($ratio) == 'number') and ($best-ratio < $ratio) {
+      $best-name: nth($options, index($contrast-list, $best-ratio));
+      @warn 'The contrast ratio between `#{$color}` and `#{$best-name}` '
+            + 'is only `#{$best-ratio}` (less than `#{$ratio}`).';
+    }
+  }
+
+  @return $best-color;
+}
+
+
+// Contrasted
+// ----------
+/// For any background color,
+/// select the best contrasting text color among a set of options.
+/// For best results, pass a combination of light and dark colors
+/// to contrast against.
+///
+/// @group contrast
+///
+/// @param {String | list} $background -
+///   The name of a color in your palette,
+///   with optional adjustments in the form of `(<function-name>: <args>)`.
+/// @param {Arglist} $options -
+///   Colors to contrast against.
+/// @output -
+///   Sets the `background-color` to `$background`
+///   and the foreground `color` to
+///   whichever option has better contrast against the given background.
+@mixin contrasted(
+  $background,
+  $options...
+) {
+  $background: color($background);
+
+  background-color: $background;
+  color: contrast($background, $options...);
+}

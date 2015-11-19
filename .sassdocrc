@@ -1,1 +1,6 @@
 theme: oddbird
+
+groups:
+  config: configuration
+  util: utilities
+  contrast: contrast
