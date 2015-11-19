@@ -1,4 +1,4 @@
-theme: oddbird
+theme: '../../sassdoc-theme-oddbird/'
 
 groups:
   config: configuration

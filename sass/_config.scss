@@ -1,11 +1,6 @@
 // Color Config
 // ============
-
-
-////
 // Configure and access your color palette.
-// @group config
-////
 
 
 // Color Palette
@@ -17,6 +12,8 @@
 /// using a `(<function-name>: <args>)` syntax.
 /// Adjustment functions are called in this format:
 /// `function-name($color-value, $args...)`.
+///
+/// @group config
 ///
 /// @example scss - sample color palette
 ///   $colors: (
@@ -38,6 +35,8 @@ $colors: () !default;
 // -----
 /// Access any color in your palette,
 /// using the same syntax as the `$colors` map
+///
+/// @group config
 ///
 /// @param {String | List} $color -
 ///   The name of a color in your palette,
