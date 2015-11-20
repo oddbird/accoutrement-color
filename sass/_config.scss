@@ -61,7 +61,7 @@ $colors: () !default;
       $call: join(($function, $color), $value);
       $color: call($call...);
     } @else {
-      @warn "#{$function} is not a valid color function.";
+      @warn '#{$function} is not a valid color function.';
     }
   }
 

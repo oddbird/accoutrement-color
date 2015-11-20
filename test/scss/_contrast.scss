@@ -2,6 +2,31 @@
 // ==============
 
 
+// Luminance [function]
+// --------------------
+@include test-module('Luminance [function]') {
+  @include test('Returns luminance of a color') {
+    // @@@ using white to avoid a sass comparison bug...
+    @include assert-equal(
+      luminance(#fff),
+      1,
+      'White has a luminance of 1.');
+  }
+}
+
+
+// Contrast Ratio [function]
+// -------------------------
+@include test-module('Contrast Ratio [function]') {
+  @include test('Returns contrast ratio between two colors') {
+    @include assert-equal(
+      contrast-ratio(#000, #fff),
+      21,
+      'Black and white have a contrast of 21.');
+  }
+}
+
+
 // Contrast [function]
 // -------------------
 @include test-module('Contrast [function]') {
@@ -40,7 +65,7 @@
 
   @include test('Multiple contrast options') {
     @include assert-equal(
-      contrast('primary', yellow, #fcc, green, 'light', #003),
+      contrast('primary', #ff0, #fcc, #0f0, 'light', #003),
       #003,
       'Returns the best option from the list.');
   }

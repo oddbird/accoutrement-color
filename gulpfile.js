@@ -9,6 +9,7 @@ var sassdoc = require('sassdoc');
 var sasslint = require('gulp-sass-lint');
 
 var paths = {
+  TEST_DIR: 'test/',
   SASS_DIR: 'sass/',
   IGNORE: [
     '!**/.#*',
@@ -17,6 +18,12 @@ var paths = {
   init: function () {
     this.SASS = [
       this.SASS_DIR + '**/*.scss'
+    ].concat(this.IGNORE);
+    this.ALL_SASS = [
+      this.SASS_DIR + '**/*.scss',
+      this.TEST_DIR + '**/*.scss',
+      // @@@ https://github.com/sasstools/sass-lint/issues/305
+      '!' + this.TEST_DIR + 'scss/_contrast.scss'
     ].concat(this.IGNORE);
     return this;
   }
@@ -43,11 +50,11 @@ var sasslintTask = function (src, failOnError, log) {
 };
 
 gulp.task('sasslint', function () {
-  return sasslintTask(paths.SASS, true);
+  return sasslintTask(paths.ALL_SASS, true);
 });
 
 gulp.task('sasslint-nofail', function () {
-  return sasslintTask(paths.SASS);
+  return sasslintTask(paths.ALL_SASS);
 });
 
 gulp.task('sassdoc', function () {
@@ -56,8 +63,10 @@ gulp.task('sassdoc', function () {
 });
 
 gulp.task('watch', function () {
+  gulp.watch(paths.SASS, ['sassdoc']);
+
   // lint scss on changes
-  gulp.watch(paths.SASS, ['sassdoc'], function (ev) {
+  gulp.watch(paths.ALL_SASS, function (ev) {
     if (ev.type === 'added' || ev.type === 'changed') {
       sasslintTask(ev.path, false, true);
     }
