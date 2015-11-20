@@ -1,8 +1,8 @@
 accoutrement-color
 ==================
 
-Color map magic 
+Color map magic
 
 ## Installation
 
-``bower install accoutrement-color``
+``npm install accoutrement-color``
