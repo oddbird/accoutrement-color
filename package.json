@@ -30,7 +30,8 @@
     "exports": "eyeglass-exports.js"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/mocha",
+    "release": "npm run test && gulp sasslint && gulp sassdoc"
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement-color/issues"
