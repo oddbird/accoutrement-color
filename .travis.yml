@@ -1,0 +1,4 @@
+language: node_js
+sudo: false
+notifications:
+  slack: oddbird:GXQITgJ177LmwmCuyPSCPaV1
