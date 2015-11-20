@@ -1,0 +1,10 @@
+theme: 'oddbird'
+
+display:
+  access:
+    - public
+
+groups:
+  config: configuration
+  util: utilities
+  contrast: contrast

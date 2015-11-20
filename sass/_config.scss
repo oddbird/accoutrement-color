@@ -1,0 +1,69 @@
+// Color Config
+// ============
+// Configure and access your color palette.
+
+
+// Color Palette
+// -------------
+/// Define your color palette with a `name`, `value`,
+/// and optional `adjustments`.
+/// Colors can reference other colors in the map,
+/// and adjust them using sass color functions
+/// using a `(<function-name>: <args>)` syntax.
+/// Adjustment functions are called in this format:
+/// `function-name($color-value, $args...)`.
+///
+/// @group config
+///
+/// @example scss - sample color palette
+///   $colors: (
+///     'name': <value> (<function-name>: <args>),
+///
+///     'brand-pink': hsl(330, 85%, 62%),
+///     'brand-light': #fff,
+///     'brand-dark': #222,
+///
+///     'background': 'brand-light',
+///     'text': 'brand-dark',
+///     'link': 'brand-pink',
+///     'focus': 'link' ('darken': 15%),
+///   );
+$colors: () !default;
+
+
+// Color
+// -----
+/// Access any color in your palette,
+/// using the same syntax as the `$colors` map
+///
+/// @group config
+///
+/// @param {String | List} $color -
+///   The name of a color in your palette,
+///   with optional adjustments in the form of `(<function-name>: <args>)`.
+/// @return {Color} -
+///   A calculated css-ready color-value based on your global color palette.
+@function color(
+  $color
+) {
+  // Parse arguments
+  $color: map-get($colors, $color) or $color;
+  $base: nth($color, 1);
+  $adjust: if(length($color) > 1, nth($color, 2), ());
+
+  // Recursive check
+  $color: if(map-has-key($colors, $base), color($base), $base);
+
+  // Adjustments
+  @each $function, $value in $adjust {
+    @if function-exists($function) {
+      // @@@ this works around a libsass bug...
+      $call: join(($function, $color), $value);
+      $color: call($call...);
+    } @else {
+      @warn '#{$function} is not a valid color function.';
+    }
+  }
+
+  @return $color;
+}
