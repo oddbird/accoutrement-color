@@ -21,6 +21,7 @@ $wcag-contrast: (
 /// The contrast-ratio required for your project.
 /// `contrast` and `contrasted` will throw errors
 /// if no color option meets the required standard.
+/// @group contrast
 $contrast-ratio: 'aa' !default;
 
 

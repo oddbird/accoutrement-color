@@ -1,4 +1,8 @@
-theme: oddbird
+theme: '../../sassdoc-theme-oddbird/'
+
+display:
+  access:
+    - public
 
 groups:
   config: configuration
