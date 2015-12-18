@@ -8,14 +8,14 @@
     "url": "git://github.com/oddbird/accoutrement-color.git"
   },
   "devDependencies": {
-    "chalk": "^1.1.1",
-    "gulp": "^3.9.0",
-    "gulp-sass-lint": "^1.1.0",
-    "gulp-util": "^3.0.7",
-    "mocha": "^2.3.4",
-    "sass-true": "^2.0.3",
-    "sassdoc": "^2.1.15",
-    "sassdoc-theme-oddbird": "^0.1.0"
+    "chalk": "1.1.1",
+    "gulp": "3.9.0",
+    "gulp-sass-lint": "1.1.0",
+    "gulp-util": "3.0.7",
+    "mocha": "2.3.4",
+    "sass-true": "2.0.3",
+    "sassdoc": "2.1.16",
+    "sassdoc-theme-herman": "0.2.0"
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",
