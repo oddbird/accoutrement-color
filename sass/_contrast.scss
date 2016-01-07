@@ -16,15 +16,6 @@ $wcag-contrast: (
 );
 
 
-// Contrast Ratio
-// --------------
-/// The contrast-ratio required for your project.
-/// `contrast` and `contrasted` will throw errors
-/// if no color option meets the required standard.
-/// @group contrast
-$contrast-ratio: 'aa' !default;
-
-
 // Luminance
 // ---------
 /// Get the WCAG luminance of a color in your palette.
@@ -76,30 +67,39 @@ $contrast-ratio: 'aa' !default;
 /// @group contrast
 /// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
 ///
-/// @param {String | list} $color -
+/// @param {string | list | number} $color -
 ///   The name of a color in your palette,
-///   with optional adjustments in the form of `(<function-name>: <args>)`.
-/// @param {String | list} $contrast -
+///   with optional adjustments in the form of `(<function-name>: <args>)`,
+///   or a pre-calculated luminance.
+/// @param {string | list | number} $contrast -
 ///   The name of a color to contrast against the first,
-///   with optional adjustments in the form of `(<function-name>: <args>)`.
+///   with optional adjustments in the form of `(<function-name>: <args>)`,
+///   or a pre-calculated luminance.
+/// @param {'aa' | 'aa-large' | 'aaa' | Number | false} $require [false] -
+///   An optional contrast ratio to require.
+///   The function will throw a warning if the required ratio is not met.
 @function contrast-ratio(
   $base,
-  $contrast
+  $contrast,
+  $require: false
 ) {
-  @if (type-of($base) != 'number' ){
-    $base: luminance($base);
-    $contrast: luminance($contrast);
+  $is-lumins: (type-of($base) == 'number');
+
+  $base-lumin: if($is-lumins, $base, luminance($base));
+  $contrast-lumin: if($is-lumins, $contrast, luminance($contrast));
+
+  $darker: min($base-lumin, $contrast-lumin);
+  $lighter: max($base-lumin, $contrast-lumin);
+
+  $ratio: ($lighter + 0.05) / ($darker + 0.05);
+  $require: map-get($wcag-contrast, $require) or $require;
+
+  @if $require and ($ratio < $require) {
+    @warn 'The contrast ratio between `#{$base}` and `#{$contrast}` is '
+    + '#{$ratio}, but a ratio of #{$require} or more is required.';
   }
 
-  $darker: $base;
-  $lighter: $contrast;
-
-  @if $base > $contrast {
-    $lighter: $base;
-    $darker: $contrast;
-  }
-
-  @return ($lighter + 0.05) / ($darker + 0.05);
+  @return $ratio;
 }
 
 
@@ -150,17 +150,6 @@ $contrast-ratio: 'aa' !default;
   // Find the best results
   $best-ratio: max($contrast-list...);
   $best-color: nth($color-list, index($contrast-list, $best-ratio));
-
-  // Check results against standards
-  @if $contrast-ratio {
-    $ratio: map-get($wcag-contrast, $contrast-ratio) or $contrast-ratio;
-
-    @if (type-of($ratio) == 'number') and ($best-ratio < $ratio) {
-      $best-name: nth($options, index($contrast-list, $best-ratio));
-      @warn 'The contrast ratio between `#{$color}` and `#{$best-name}` '
-      + 'is only `#{$best-ratio}` (less than `#{$ratio}`).';
-    }
-  }
 
   @return $best-color;
 }
