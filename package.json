@@ -1,6 +1,6 @@
 {
   "name": "accoutrement-color",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.3",
   "description": "Sass color-palette management, and utilities.",
   "homepage": "https://github.com/oddbird/accoutrement-color",
   "repository": {
@@ -12,6 +12,7 @@
     "gulp": "3.9.0",
     "gulp-sass-lint": "1.1.0",
     "gulp-util": "3.0.7",
+    "mathsass": "0.9.5",
     "mocha": "2.3.4",
     "sass-true": "2.0.3",
     "sassdoc": "2.1.16",
@@ -35,8 +36,5 @@
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement-color/issues"
-  },
-  "dependencies": {
-    "mathsass": "^0.9.5"
   }
 }

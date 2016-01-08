@@ -2,9 +2,6 @@
 // ==============
 
 
-@import '../node_modules/mathsass/dist/math';
-
-
 // WCAG Contrast
 // -------------
 /// Contrast ratios from the WCAG.
@@ -19,6 +16,10 @@ $wcag-contrast: (
 // Luminance
 // ---------
 /// Get the WCAG luminance of a color in your palette.
+/// **Warning**: Calculating luminance requires a `pow()` function
+/// like the one available in
+/// [MathSass](https://github.com/terkel/mathsass/blob/master/dist/functions/_pow.scss),
+/// which is not included in this library.
 ///
 /// @group contrast
 /// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
@@ -31,6 +32,11 @@ $wcag-contrast: (
 ) {
   $color: color($color);
   $luminance: 0;
+
+  @if not function-exists('pow') {
+    @error 'Luminance and contrast calculations require a `pow()` function '
+    + 'like the one available from MathSass.';
+  }
 
   @if (type-of($color) != 'color') {
     @error '`#{$color}` is not a color.';

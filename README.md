@@ -44,12 +44,20 @@ Access your colors from anywhere:
   // adjust on the fly
   text: color('brand-pink' ('saturate': -15%));
 }
+```
 
+We'll even help you calculate WCAG-appropriate color contrasts
+(this feature requires a `pow()` function
+like the one available in [MathSass][mathsass].
+
+```scss
 a:hover {
   // set a background, and get well-contrasted text
   @include contrasted('link');
 }
 ```
+
+[mathsass]: https://github.com/terkel/mathsass
 
 
 About OddBird Accoutrement
