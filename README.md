@@ -63,7 +63,7 @@ a:hover {
 About OddBird Accoutrement
 --------------------------
 
-[OddBird][oddbird]'s *Accourement* modules
+[OddBird][oddbird]'s **Accoutrement** modules
 are individual Sass toolkits
 that work together to form
 the central nervous system of a project.
