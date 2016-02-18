@@ -6,6 +6,15 @@ Gather all your colors into a single map,
 access them by name,
 and check for [WCAG-appropriate][wcag] contrast.
 
+> [OddBird][oddbird]'s **[Accoutrement][accoutrement]** modules
+  are individual Sass toolkits
+  that work together to form
+  the central nervous system of a project.
+  They help to establish and access a projects configuration
+  in consistent and inter-connected ways.
+
+[oddbird]: http://oddbird.net/
+[accoutrement]: http://oddbird.net/accoutrement/
 [wcag]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
 
 
@@ -58,16 +67,3 @@ a:hover {
 ```
 
 [mathsass]: https://github.com/terkel/mathsass
-
-
-About OddBird Accoutrement
---------------------------
-
-[OddBird][oddbird]'s **Accoutrement** modules
-are individual Sass toolkits
-that work together to form
-the central nervous system of a project.
-They help to establish and access a projects configuration
-in consistent and inter-connected ways.
-
-[oddbird]: http://oddbird.net/

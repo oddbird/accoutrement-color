@@ -28,7 +28,7 @@
     "eyeglass-module"
   ],
   "eyeglass": {
-    "exports": "eyeglass-exports.js"
+    "needs": "*"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha",
