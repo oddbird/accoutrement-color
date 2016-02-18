@@ -1,6 +1,6 @@
 {
   "name": "accoutrement-color",
-  "version": "2.0.0-rc.3",
+  "version": "2.0.0",
   "description": "Sass color-palette management, and utilities.",
   "homepage": "https://github.com/oddbird/accoutrement-color",
   "repository": {
@@ -28,7 +28,9 @@
     "eyeglass-module"
   ],
   "eyeglass": {
-    "needs": "*"
+    "needs": "^0.8.2",
+    "sassDir": "./_mq.scss",
+    "exports": false
   },
   "scripts": {
     "test": "node_modules/.bin/mocha",
