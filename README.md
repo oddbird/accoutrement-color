@@ -1,21 +1,14 @@
 Accoutrement-Color
 ==================
 
-Sass color management tools.
+Sass color [Accoutrement][accoutrement]
+by [OddBird][oddbird].
 Gather all your colors into a single map,
 access them by name,
 and check for [WCAG-appropriate][wcag] contrast.
 
-> [OddBird][oddbird]'s **[Accoutrement][accoutrement]** modules
-  are individual Sass toolkits
-  that work together to form
-  the central nervous system of a project.
-  They help to establish and access a projects configuration
-  in consistent and inter-connected ways.
-
-[oddbird]: http://oddbird.net/
 [accoutrement]: http://oddbird.net/accoutrement/
-[wcag]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+[oddbird]: http://oddbird.net/
 
 
 Quick Start
@@ -23,6 +16,12 @@ Quick Start
 
 ```bash
 npm install accoutrement-color
+```
+
+Import the library:
+
+```scss
+@import 'path/to/accoutrement-color/color';
 ```
 
 Establish your color palette:
