@@ -9,6 +9,7 @@ and check for [WCAG-appropriate][wcag] contrast.
 
 [accoutrement]: http://oddbird.net/accoutrement/
 [oddbird]: http://oddbird.net/
+[wcag]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
 
 
 Quick Start
