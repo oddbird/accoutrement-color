@@ -22,7 +22,7 @@ npm install accoutrement-color
 Import the library:
 
 ```scss
-@import 'path/to/accoutrement-color/color';
+@import 'path/to/accoutrement-color/sass/color';
 ```
 
 Establish your color palette:
