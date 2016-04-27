@@ -57,9 +57,7 @@ $colors: () !default;
   // Adjustments
   @each $function, $value in $adjust {
     @if function-exists($function) {
-      // @@@ this works around a libsass bug...
-      $call: join(($function, $color), $value);
-      $color: call($call...);
+      $color: call($function, $color, $value...);
     } @else {
       @warn '#{$function} is not a valid color function.';
     }
