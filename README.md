@@ -51,7 +51,7 @@ Access your colors from anywhere:
   border-color: color('border');
 
   // adjust on the fly
-  text: color('brand-pink' ('saturate': -15%));
+  color: color('brand-pink' ('saturate': -15%));
 }
 ```
 
