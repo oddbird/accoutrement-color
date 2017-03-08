@@ -24,3 +24,31 @@
       'Returns a color mixed with black at a given weight.');
   }
 }
+
+
+// Get Function [function]
+// -----------------------
+@include test-module('Get Function [function]') {
+  $test: _ac-color-get-function('size');
+  $expect: 'size';
+
+  @if function-exists('get-function') {
+    $expect: get-function('size');
+
+    @include test('Functions are returned without change') {
+      @include assert-equal(
+        _ac-color-get-function($expect),
+        $expect);
+    }
+  }
+
+  @include test('Returns a function or function-name') {
+    @include assert-equal($test, $expect);
+  }
+
+  @include test('Returned function or name is callable') {
+    @include assert-equal(
+      call($test, 'root'),
+      size('root'));
+  }
+}

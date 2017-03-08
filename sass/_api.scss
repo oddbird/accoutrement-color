@@ -1,0 +1,44 @@
+// Color API
+// =========
+
+
+// Color
+// -----
+/// Access any color in your palette,
+/// or generate new colors on the fly.
+///
+/// @group colors
+///
+/// @parameter {string | list} $color -
+///   The name of a color in your palette,
+///   or a valid css color-value,
+///   with optional adjustments
+///   in the form of `<origin-color> (<function>: <args...>)`.
+///
+/// @parameter {Map} $palette [$colors] -
+///   A map containing the source color-palette
+///   for accessing previously-defined colors.
+///
+/// @return {Color} -
+///   A calculated css-ready color,
+///   based on your global color palette and adjustments.
+@function color(
+  $color,
+  $palette: $colors
+) {
+  // Parse arguments
+  $color: map-get($palette, $color) or $color;
+  $base: nth($color, 1);
+  $adjust: if(length($color) > 1, nth($color, 2), ());
+
+  // Recursive check
+  $color: if(map-has-key($palette, $base), color($base), $base);
+
+  // Adjustments
+  @each $function, $value in $adjust {
+    $function: _ac-color-get-function($function);
+    $color: call($function, $color, $value...);
+  }
+
+  @return $color;
+}

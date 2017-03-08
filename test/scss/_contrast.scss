@@ -79,7 +79,7 @@
 @include test-module('contrasted [mixin]') {
   @include test('Dark on light') {
     @include assert('Use a dark color on a light background.') {
-      @include input {
+      @include output {
         @include contrasted(#eee);
       }
 
@@ -92,7 +92,7 @@
 
   @include test('Light on dark') {
     @include assert('Use a light color on a dark background.') {
-      @include input {
+      @include output {
         @include contrasted('dark');
       }
 

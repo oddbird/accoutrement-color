@@ -3,17 +3,26 @@
 // Configure and access your color palette.
 
 
-// Color Palette
-// -------------
-/// Define your color palette with a `name`, `value`,
+// Color Map
+// ---------
+/// Define your colors with a `name`, `value`,
 /// and optional `adjustments`.
-/// Colors can reference other colors in the map,
-/// and adjust them using sass color functions
-/// using a `(<function-name>: <args>)` syntax.
-/// Adjustment functions are called in this format:
-/// `function-name($color-value, $args...)`.
 ///
 /// @group config
+///
+/// @property {color | string | list} <color-name> -
+///   Each color in the map consists of a name (key),
+///   and a value defining that color's origin,
+///   along with optional `adjustments`.
+///   Color origins can be CSS-ready colors (hex, rgb, hsla, etc.),
+///   or references other colors in the map.
+///   Adjustments are a nested map of color function names and arguments,
+///   using a `<origin-color> (<function-name>: <args...>)` syntax.
+///   Adjustment functions are then called in this format:
+///   `function-name($origin-color, $args...)`.
+///
+/// @see {function} color
+/// @see {mixin} color-palette
 ///
 /// @example scss - sample color palette
 ///   $colors: (
@@ -31,37 +40,50 @@
 $colors: () !default;
 
 
-// Color
-// -----
-/// Access any color in your palette,
-/// using the same syntax as the `$colors` map
+// Merge Colors
+// ------------
+/// Merge multiple color maps into a single map,
+/// in case you want to define colors in smaller groups
+/// such as `brand-colors`, `link-colors`, etc
+/// but then treat them as a single map of colors.
+/// To merge and update the global `$colors` variable,
+/// use the `add-colors()` mixin.
 ///
 /// @group config
 ///
-/// @param {String | List} $color -
-///   The name of a color in your palette,
-///   with optional adjustments in the form of `(<function-name>: <args>)`.
-/// @return {Color} -
-///   A calculated css-ready color-value based on your global color palette.
-@function color(
-  $color
+/// @parameter {Map...} $maps -
+///   Pass any number of maps to be merged.
+/// @return {Map} -
+///   The merged map.
+/// @see colors
+/// @see add-colors
+@function merge-colors(
+  $maps...
 ) {
-  // Parse arguments
-  $color: map-get($colors, $color) or $color;
-  $base: nth($color, 1);
-  $adjust: if(length($color) > 1, nth($color, 2), ());
+  $return: ();
 
-  // Recursive check
-  $color: if(map-has-key($colors, $base), color($base), $base);
-
-  // Adjustments
-  @each $function, $value in $adjust {
-    @if function-exists($function) {
-      $color: call($function, $color, $value...);
-    } @else {
-      @warn '#{$function} is not a valid color function.';
-    }
+  @each $map in $maps {
+    $return: map-merge($return, $map);
   }
 
-  @return $color;
+  @return $return;
+}
+
+
+// Add Colors
+// ----------
+/// Merge multiple color maps into the global `$colors` map,
+/// in case you want to define colors in smaller groups
+/// such as `brand-colors`, `link-colors`, etc
+/// before merging them into a single color-palette.
+///
+/// @group config
+///
+/// @parameter {Map...} $maps -
+///   Pass any number of maps to be merged.
+/// @see colors
+@mixin add-colors (
+  $maps...
+) {
+  $colors: merge-colors($colors, $maps...) !global;
 }

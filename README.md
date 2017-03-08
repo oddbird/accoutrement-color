@@ -55,6 +55,31 @@ Access your colors from anywhere:
 }
 ```
 
+You can also define your colors in smaller maps,
+and then add them to the global `$colors` variable
+using the `merge-color()` function,
+or `add-colors()` mixin.
+
+```scss
+$brand: (
+  'brand-pink': hsl(330, 85%, 62%),
+  'brand-light': #ddf,
+  'brand-dark': #224,
+);
+
+$patterns: (
+  'background': 'brand-light',
+  'border': 'brand-dark',
+  'link': 'brand-pink' ('shade': 25%),
+);
+
+// use the function to return a single map:
+$colors: merge-colors($brand, $patterns);
+
+// or use the mixin to add everything to $colors automatically:
+@include add-colors($brand, $patterns);
+```
+
 We'll even help you calculate WCAG-appropriate color contrasts
 (this feature requires a `pow()` function
 like the one available in [MathSass][mathsass].

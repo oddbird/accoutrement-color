@@ -2,42 +2,36 @@
 // ==================
 
 
-// Color [function]
-// ----------------
-@include test-module('Color [function]') {
-  @include test('Named color') {
+// Merge Colors [function]
+// -----------------------
+@include test-module('Merge Colors [function]') {
+  $a: ('red': #f33);
+  $b: ('green': #3f3);
+
+  @include test('Merges colors into a single map') {
     @include assert-equal(
-      color('simple'),
-      map-get($colors, 'simple'),
-      'Returns simple color based on styleguide keyword');
+      merge-colors($a, $b),
+      map-merge($a, $b)
+      );
+  }
+}
+
+
+// Add Colors [mixin]
+// ------------------
+@include test-module('Add Colors [mixin]') {
+  $old: $colors;
+  $a: ('red': #f33);
+  $b: ('green': #3f3);
+
+  @include add-colors($a, $b);
+
+  @include test('Merges colors, and updates global variable') {
+    @include assert-equal(
+      $colors,
+      map-merge($colors, map-merge($a, $b))
+      );
   }
 
-  @include test('Referenced color') {
-    @include assert-equal(
-      color('primary'),
-      map-get($colors, 'red'),
-      'Returns color based on referential styleguide keyword');
-  }
-
-  @include test('Adjusted color') {
-    @include assert-equal(
-      color('secondary'),
-      desaturate(tint(map-get($colors, 'red'), 30%), 25%),
-      'Returns color based on self-referential keyword and adjustments');
-  }
-
-  @include test('Complex nesting of colors') {
-    @include assert-equal(
-      color('wtf'),
-      adjust-hue(desaturate(tint(map-get($colors, 'red'), 30%), 25%), 24deg),
-      'Returns color based on multiple keywords and adjustments');
-  }
-
-  @include test('Multiple adjustment function arguments') {
-    $adjust: ('contrast': (#999, #666, #333));
-    @include assert-equal(
-      color(#fcc $adjust),
-      #333,
-      'Handles multiple arguments to color-adjustment function');
-  }
+  $colors: $old !global;
 }

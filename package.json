@@ -1,6 +1,6 @@
 {
   "name": "accoutrement-color",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Sass color-palette management, and utilities.",
   "homepage": "https://github.com/oddbird/accoutrement-color",
   "repository": {
@@ -10,13 +10,13 @@
   "devDependencies": {
     "chalk": "1.1.1",
     "gulp": "3.9.0",
-    "gulp-sass-lint": "1.1.0",
+    "gulp-sass-lint": "1.3.2",
     "gulp-util": "3.0.7",
     "mathsass": "0.9.5",
     "mocha": "2.3.4",
-    "sass-true": "2.0.3",
-    "sassdoc": "2.1.16",
-    "sassdoc-theme-herman": "0.2.0"
+    "sass-true": "2.2.1",
+    "sassdoc": "2.2.0",
+    "sassdoc-theme-herman": "0.5.5"
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",
