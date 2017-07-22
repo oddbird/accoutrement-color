@@ -33,11 +33,6 @@ $wcag-contrast: (
   $color: color($color);
   $luminance: 0;
 
-  @if not function-exists('pow') {
-    @error 'Luminance and contrast calculations require a `pow()` function '
-    + 'like the one available from MathSass.';
-  }
-
   @if (type-of($color) != 'color') {
     @error '`#{$color}` is not a color.';
   }
@@ -48,7 +43,15 @@ $wcag-contrast: (
     @if ($value < 0.03928) {
       $value: $value / 12.92;
     } @else {
-      $value: pow((($value + 0.055) / 1.055), 2.4);
+      $base: ($value + 0.055) / 1.055;
+      @if function-exists('pow') {
+        $value: pow($base, 2.4);
+      } @else {
+        @error 'Luminance and contrast calculations require a `pow()` '
+        + 'function like the one available from MathSass. Falling back to '
+        + 'rough approximation';
+        $value: 0.56 * ($base * $base * $base) + 0.44 * ($base * $base);
+      }
     }
 
     @if ($component == 'red') {
