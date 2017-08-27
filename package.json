@@ -1,8 +1,8 @@
 {
   "name": "accoutrement-color",
   "version": "2.1.1",
-  "description": "Sass color-palette management, and utilities.",
-  "homepage": "https://github.com/oddbird/accoutrement-color",
+  "description": "Sass color-palette management and utilities.",
+  "homepage": "https://oddbird.net/accoutrement-color",
   "repository": {
     "type": "git",
     "url": "git://github.com/oddbird/accoutrement-color.git"
@@ -16,7 +16,9 @@
     "mocha": "2.3.4",
     "sass-true": "2.2.1",
     "sassdoc": "2.2.0",
-    "sassdoc-theme-herman": "0.5.5"
+    "sassdoc-theme-herman": "^1.0.0-alpha.9",
+    "sassdocify": "^0.3.4",
+    "true": "^0.0.4"
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",
@@ -28,13 +30,15 @@
     "eyeglass-module"
   ],
   "eyeglass": {
-    "needs": "^0.8.2",
-    "sassDir": "./_mq.scss",
-    "exports": false
+    "sassDir": "sass",
+    "exports": false,
+    "name": "accoutrement-color",
+    "needs": "^1.0.0"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha",
-    "release": "npm run test && gulp sasslint && gulp sassdoc"
+    "sassdoc": "sassdoc sass",
+    "commit": "npm test; gulp sasslint; npm run sassdoc"
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement-color/issues"
