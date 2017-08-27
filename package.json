@@ -14,11 +14,10 @@
     "gulp-util": "3.0.7",
     "mathsass": "0.9.5",
     "mocha": "2.3.4",
-    "sass-true": "2.2.1",
+    "sass-true": "^3.0.0",
     "sassdoc": "2.2.0",
     "sassdoc-theme-herman": "^1.0.0-alpha.9",
-    "sassdocify": "^0.3.4",
-    "true": "^0.0.4"
+    "sassdocify": "^0.3.4"
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",
