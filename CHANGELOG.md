@@ -1,10 +1,15 @@
 Accoutrement-Color Changelog
 ============================
 
+2.1.2 - 08/26/17
+----------------
+- Docs: Update Herman, and simplify publication
+
 
 2.1.1 - 05/21/17
 ----------------
 - Docs: Remove unused mixin Sassdoc comment
+
 
 2.1.0 - 03/08/17
 ----------------
