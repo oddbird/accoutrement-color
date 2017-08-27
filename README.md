@@ -7,7 +7,7 @@ Gather all your colors into a single map,
 access them by name,
 and check for [WCAG-appropriate][wcag] contrast.
 
-[accoutrement]: http://oddbird.net/accoutrement/
+[accoutrement]: http://oddbird.net/open-source/accoutrement/
 [oddbird]: http://oddbird.net/
 [wcag]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
 
