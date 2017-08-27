@@ -8,7 +8,7 @@
 /// Define your colors with a `name`, `value`,
 /// and optional `adjustments`.
 ///
-/// @group config
+/// @group a-config
 ///
 /// @property {color | string | list} <color-name> -
 ///   Each color in the map consists of a name (key),
@@ -48,7 +48,7 @@ $colors: () !default;
 /// To merge and update the global `$colors` variable,
 /// use the `add-colors()` mixin.
 ///
-/// @group config
+/// @group a-config
 ///
 /// @parameter {Map...} $maps -
 ///   Pass any number of maps to be merged.
@@ -76,7 +76,7 @@ $colors: () !default;
 /// such as `brand-colors`, `link-colors`, etc
 /// before merging them into a single color-palette.
 ///
-/// @group config
+/// @group a-config
 ///
 /// @parameter {Map...} $maps -
 ///   Pass any number of maps to be merged.
