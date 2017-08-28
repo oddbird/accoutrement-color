@@ -35,8 +35,7 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha",
-    "sassdoc": "sassdoc sass",
-    "commit": "npm test; gulp sasslint; npm run sassdoc"
+    "commit": "npm test; gulp sasslint; gulp sassdoc"
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement-color/issues"

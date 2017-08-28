@@ -13,59 +13,6 @@ $wcag-contrast: (
 );
 
 
-// Luminance
-// ---------
-/// Get the WCAG luminance of a color in your palette.
-/// **Warning**: Calculating luminance requires a `pow()` function
-/// like the one available in
-/// [MathSass](https://github.com/terkel/mathsass/blob/master/dist/functions/_pow.scss),
-/// which is not included in this library.
-///
-/// @group contrast
-/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
-///
-/// @param {String | list} $color -
-///   The name of a color in your palette,
-///   with optional adjustments in the form of `(<function-name>: <args>)`.
-@function luminance(
-  $color
-) {
-  $color: color($color);
-  $luminance: 0;
-
-  @if not function-exists('pow') {
-    @error 'Luminance and contrast calculations require a `pow()` function '
-    + 'like the one available from MathSass.';
-  }
-
-  @if (type-of($color) != 'color') {
-    @error '`#{$color}` is not a color.';
-  }
-
-  @each $component in 'red' 'green' 'blue' {
-    $value: call($component, $color) / 255;
-
-    @if ($value < 0.03928) {
-      $value: $value / 12.92;
-    } @else {
-      $value: pow((($value + 0.055) / 1.055), 2.4);
-    }
-
-    @if ($component == 'red') {
-      $value: $value * 0.2126;
-    } @else if ($component == 'green') {
-      $value: $value * 0.7152;
-    } @else {
-      $value: $value * 0.0722;
-    }
-
-    $luminance: $luminance + $value;
-  }
-
-  @return $luminance;
-}
-
-
 // Contrast Ratio
 // --------------
 /// Get the WCAG contrast-ratio between any two colors in your palette.
@@ -81,9 +28,16 @@ $wcag-contrast: (
 ///   The name of a color to contrast against the first,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`,
 ///   or a pre-calculated luminance.
-/// @param {'aa' | 'aa-large' | 'aaa' | Number | false} $require [false] -
+/// @param {'aa' | 'aa-large' | 'aaa' | number | false} $require [false] -
 ///   An optional contrast ratio to require.
-///   The function will throw a warning if the required ratio is not met.
+///   The function will return false if the required ratio is not met.
+/// @return {number} -
+///   The WCAG-defined contrast-ratio of two colors.
+///
+/// @example scss
+///   @import '../node_modules/mathsass/dist/math';
+///   /* black and white: #{contrast-ratio(white, black)} */
+///   /* failed 'aaa': #{contrast-ratio(white, #999, 'aaa')} */
 @function contrast-ratio(
   $base,
   $contrast,
@@ -101,8 +55,7 @@ $wcag-contrast: (
   $require: map-get($wcag-contrast, $require) or $require;
 
   @if $require and ($ratio < $require) {
-    @warn 'The contrast ratio between `#{$base}` and `#{$contrast}` is '
-    + '#{$ratio}, but a ratio of #{$require} or more is required.';
+    @return false;
   }
 
   @return $ratio;
@@ -121,11 +74,28 @@ $wcag-contrast: (
 ///   The name of a color in your palette,
 ///   with optional adjustments in the form of `(<function-name>: <args>)`.
 /// @param {Arglist} $options [#000, #fff] -
-///   Colors to contrast against.
+///   Two or more colors to contrast against.
+///   This function will choose the best contrast of all the options.
 ///   Will use `contrast-light` and `contrast-dark` as defaults
-///   if they are defined in your color palette.
+///   if they are defined in your color palette,
+///   otherwise `white` and `black` are the default options.
 /// @return {Color} -
-///   Whichever option has the highest contrast-ratio to `$color`.
+///   Whichever color-option has the highest contrast-ratio to `$color`.
+///
+/// @example scss - default options
+///   @import '../node_modules/mathsass/dist/math';
+///   $background: #333;
+///   html {
+///     background: $background;
+///     color: contrast($background);
+///   }
+/// @example scss - explicit options
+///   @import '../node_modules/mathsass/dist/math';
+///   $background: #333;
+///   html {
+///     background: $background;
+///     color: contrast($background, red, orange, yellow, green, blue, indigo);
+///   }
 @function contrast(
   $color,
   $options...
@@ -164,9 +134,10 @@ $wcag-contrast: (
 // Contrasted
 // ----------
 /// For any background color,
-/// select the best contrasting text color among a set of options.
-/// For best results, pass a combination of light and dark colors
-/// to contrast against.
+/// select and apply the best contrasting text color from a set of options.
+/// This works the same as the `contrast` function,
+/// but applied the resulting values to `background-color`
+/// and text `color` properties.
 ///
 /// @group contrast
 ///
@@ -179,6 +150,19 @@ $wcag-contrast: (
 ///   Sets the `background-color` to `$background`
 ///   and the foreground `color` to
 ///   whichever option has better contrast against the given background.
+///
+/// @example scss - default options
+///   @import '../node_modules/mathsass/dist/math';
+///   $background: #333;
+///   html {
+///     @include contrasted($background);
+///   }
+/// @example scss - explicit options
+///   @import '../node_modules/mathsass/dist/math';
+///   $background: #333;
+///   html {
+///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
+///   }
 @mixin contrasted(
   $background,
   $options...
@@ -187,4 +171,60 @@ $wcag-contrast: (
 
   background-color: $background;
   color: contrast($background, $options...);
+}
+
+
+// Luminance
+// ---------
+/// Get the WCAG luminance of a color in your palette.
+///
+/// **Warning**: Calculating luminance requires a `pow()` function
+/// like the one available in
+/// [MathSass](https://github.com/terkel/mathsass/blob/master/dist/functions/_pow.scss),
+/// which is not included in this library.
+///
+/// @group contrast
+/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+///
+/// @param {string | list} $color -
+///   The name of a color in your palette,
+///   with optional adjustments in the form of `(<function-name>: <args>)`.
+/// @return {number} -
+///   WCAG-defined luminance value
+@function luminance(
+  $color
+) {
+  $color: color($color);
+  $luminance: 0;
+
+  @if not function-exists('pow') {
+    @error 'Luminance and contrast calculations require a `pow()` function '
+    + 'like the one available from MathSass.';
+  }
+
+  @if (type-of($color) != 'color') {
+    @error '`#{$color}` is not a color.';
+  }
+
+  @each $component in 'red' 'green' 'blue' {
+    $value: call($component, $color) / 255;
+
+    @if ($value < 0.03928) {
+      $value: $value / 12.92;
+    } @else {
+      $value: pow((($value + 0.055) / 1.055), 2.4);
+    }
+
+    @if ($component == 'red') {
+      $value: $value * 0.2126;
+    } @else if ($component == 'green') {
+      $value: $value * 0.7152;
+    } @else {
+      $value: $value * 0.0722;
+    }
+
+    $luminance: $luminance + $value;
+  }
+
+  @return $luminance;
 }

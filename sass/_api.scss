@@ -22,6 +22,12 @@
 /// @return {Color} -
 ///   A calculated css-ready color,
 ///   based on your global color palette and adjustments.
+///
+/// @example scss
+///   html {
+///     background: color('background');
+///     color: color('text');
+///   }
 @function color(
   $color,
   $palette: $colors

@@ -1,15 +1,29 @@
 Accoutrement-Color
 ==================
 
-Sass color [Accoutrement][accoutrement]
-by [OddBird][oddbird].
+Sass color-palette management by [OddBird][oddbird].
 Gather all your colors into a single map,
 access them by name,
 and check for [WCAG-appropriate][wcag] contrast.
 
-[accoutrement]: http://oddbird.net/open-source/accoutrement/
 [oddbird]: http://oddbird.net/
 [wcag]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+
+
+More Accoutrement Tools
+-----------------------
+
+- [Init](http://oddbird.net/accoutrement-init/)
+  provides light-weight browser-normalization.
+- [Scale](http://oddbird.net/accoutrement-scale/)
+  helps manage scale patterns like font-sizes, margins, and gutters.
+- [Type](http://oddbird.net/accoutrement-type/)
+  provides webfont management tools,
+  and other typography helpers.
+- [Layout](http://oddbird.net/accoutrement-layout/)
+  provides layout utilities such as
+  box-sizing, intrinsic ratios, z-index management,
+  named media-queries, and a clearfix.
 
 
 Quick Start
