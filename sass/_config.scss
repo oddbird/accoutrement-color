@@ -34,7 +34,7 @@
 ///     'background': 'brand-light',
 ///     'text': 'brand-dark',
 ///     'link': 'brand-pink',
-///     'focus': 'link' ('darken': 15%),
+///     'focus': 'link' ('darken': 15%, 'desaturate': 15%),
 ///   );
 $colors: () !default;
 

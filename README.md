@@ -15,14 +15,17 @@ and check for [WCAG-appropriate][wcag] contrast.
 Quick Start
 -----------
 
+Install the package with npm or yarn:
+
 ```bash
 npm install accoutrement-color
+yarn add accoutrement-color
 ```
 
 Import the library:
 
 ```scss
-@import 'path/to/accoutrement-color/sass/color';
+@import '<path/to/>accoutrement-color/sass/color';
 ```
 
 Establish your color palette:
@@ -38,8 +41,8 @@ $colors: (
   'background': 'brand-light',
   'border': 'brand-dark',
 
-  // make adjustments as needed
-  'link': 'brand-pink' ('shade': 25%),
+  // make adjustments as needed, using color functions
+  'link': 'brand-pink' ('shade': 25%, 'desaturate': 15%),
 );
 ```
 
@@ -82,7 +85,7 @@ $colors: merge-colors($brand, $patterns);
 
 We'll even help you calculate WCAG-appropriate color contrasts
 (this feature requires a `pow()` function
-like the one available in [MathSass][mathsass].
+like the one available in [MathSass][mathsass]).
 
 ```scss
 a:hover {
