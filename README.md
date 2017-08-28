@@ -25,7 +25,7 @@ yarn add accoutrement-color
 Import the library:
 
 ```scss
-@import '<path/to/>accoutrement-color/sass/color';
+@import '<path-to>/accoutrement-color/sass/color';
 ```
 
 Establish your color palette:
