@@ -155,7 +155,7 @@ $WCAG-CONTRAST: (
 /// - 'AAA' == `7:1`
 ///
 /// @group contrast
-/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef W3C Contrast Definition
+/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef WCAG Contrast Definition
 ///
 /// @param {string | list | number} $color -
 ///   The name of a color in your palette,
@@ -218,13 +218,12 @@ $WCAG-CONTRAST: (
 /// [MathSass]: https://github.com/terkel/mathsass/blob/master/dist/functions/_pow.scss
 ///
 /// @group contrast
-/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef WCAG Relative Luminance
 ///
 /// @param {string | list} $color -
-///   The name of a color in your palette,
-///   with optional adjustments in the form of `(<function-name>: <args>)`.
+///   The name or value of a color.
 /// @return {number} -
-///   WCAG-defined luminance value
+///   WCAG-defined numeric luminance value.
 @function luminance(
   $color
 ) {
