@@ -35,7 +35,7 @@ $wcag-contrast: (
 ///   The WCAG-defined contrast-ratio of two colors.
 ///
 /// @example scss
-///   @import '../node_modules/mathsass/dist/math';
+///   @import '~mathsass/dist/math';
 ///   /* black and white: #{contrast-ratio(white, black)} */
 ///   /* failed 'aaa': #{contrast-ratio(white, #999, 'aaa')} */
 @function contrast-ratio(
@@ -83,14 +83,14 @@ $wcag-contrast: (
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
 ///
 /// @example scss - default options
-///   @import '../node_modules/mathsass/dist/math';
+///   @import '~mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     background: $background;
 ///     color: contrast($background);
 ///   }
 /// @example scss - explicit options
-///   @import '../node_modules/mathsass/dist/math';
+///   @import '~mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     background: $background;
@@ -152,13 +152,13 @@ $wcag-contrast: (
 ///   whichever option has better contrast against the given background.
 ///
 /// @example scss - default options
-///   @import '../node_modules/mathsass/dist/math';
+///   @import '~mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     @include contrasted($background);
 ///   }
 /// @example scss - explicit options
-///   @import '../node_modules/mathsass/dist/math';
+///   @import '~mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
