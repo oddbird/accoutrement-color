@@ -1,24 +1,36 @@
 Accoutrement-Color
 ==================
 
-Sass color-palette management by [OddBird][oddbird].
-Gather all your colors into a single map,
-access them by name,
-and check for [WCAG-appropriate][wcag] contrast.
+**Sass color-palette management by [OddBird][oddbird]…**
+
+- Organize all your colors into a single map, or set of maps
+- Document color relationships directly in the code
+- Automate [WCAG-appropriate][wcag] contrast checking
+- Generate color-palette documentation with [Herman][Herman]
 
 [oddbird]: http://oddbird.net/
 [wcag]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
 
+OddBird's Accoutrement toolkits are designed around the idea
+that code should be meaningful to both humans and machines –
+opening the door for automation.
+These tools integrate with [Herman][Herman],
+our automated living patter-library generator
+built on [SassDoc][SassDoc].
 
-More Accoutrement Tools
------------------------
+[Herman]: http://oddbird.net/herman/
+[SassDoc]: http://sassdoc.com/
+
+
+**Other Accoutrement include…**
 
 - [Init](http://oddbird.net/accoutrement-init/)
   provides light-weight browser-normalization.
 - [Scale](http://oddbird.net/accoutrement-scale/)
   helps manage scale patterns like font-sizes, margins, and gutters.
 - [Type](http://oddbird.net/accoutrement-type/)
-  provides webfont management tools,
+  provides webfont management t
+  ools,
   and other typography helpers.
 - [Layout](http://oddbird.net/accoutrement-layout/)
   provides layout utilities such as
@@ -26,8 +38,8 @@ More Accoutrement Tools
   named media-queries, and a clearfix.
 
 
-Quick Start
------------
+Quick Start Guide
+-----------------
 
 Install the package with npm or yarn:
 

@@ -13,5 +13,5 @@ groups:
 
 herman:
   sass:
-    includepaths: ['sass']
+    includepaths: ['sass', 'node_modules']
     includes: ['color']

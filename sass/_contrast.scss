@@ -2,95 +2,62 @@
 // ==============
 
 
-// WCAG Contrast
-// -------------
-/// Contrast ratios from the WCAG.
-/// @access private
-$wcag-contrast: (
-  'aa-large': 3,
-  'aa': 4.5,
-  'aaa': 7,
-);
-
-
-// Contrast Ratio
-// --------------
-/// Get the WCAG contrast-ratio between any two colors in your palette.
+/// **Note:**
+/// Color luminocity & contrast calculations require exponential math.
+/// We recommend installing the [MathSass][MathSass] library
+/// or a similar `pow()` function –
+/// otherwise we will fallback on a simple approximation
+/// with less precise results.
+///
+/// [MathSass]: https://github.com/terkel/mathsass/
 ///
 /// @group contrast
-/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+
+
+// WCAG Contrast
+// -------------
+/// These named contrast-ratios are defined by the [WCAG][WCAG].
 ///
-/// @param {string | list | number} $color -
-///   The name of a color in your palette,
-///   with optional adjustments in the form of `(<function-name>: <args>)`,
-///   or a pre-calculated luminance.
-/// @param {string | list | number} $contrast -
-///   The name of a color to contrast against the first,
-///   with optional adjustments in the form of `(<function-name>: <args>)`,
-///   or a pre-calculated luminance.
-/// @param {'aa' | 'aa-large' | 'aaa' | number | false} $require [false] -
-///   An optional contrast ratio to require.
-///   The function will return false if the required ratio is not met.
-/// @return {number} -
-///   The WCAG-defined contrast-ratio of two colors.
+/// [WCAG]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 ///
-/// @example scss
-///   @import '~mathsass/dist/math';
-///   /* black and white: #{contrast-ratio(white, black)} */
-///   /* failed 'aaa': #{contrast-ratio(white, #999, 'aaa')} */
-@function contrast-ratio(
-  $base,
-  $contrast,
-  $require: false
-) {
-  $is-lumins: (type-of($base) == 'number');
-
-  $base-lumin: if($is-lumins, $base, luminance($base));
-  $contrast-lumin: if($is-lumins, $contrast, luminance($contrast));
-
-  $darker: min($base-lumin, $contrast-lumin);
-  $lighter: max($base-lumin, $contrast-lumin);
-
-  $ratio: ($lighter + 0.05) / ($darker + 0.05);
-  $require: map-get($wcag-contrast, $require) or $require;
-
-  @if $require and ($ratio < $require) {
-    @return false;
-  }
-
-  @return $ratio;
-}
+/// @access private
+$WCAG-CONTRAST: (
+  'AA-large': 3,
+  'AA': 4.5,
+  'AAA': 7,
+);
 
 
 // Contrast
 // --------
 /// For any color, select the best contrast among a set of options.
-/// For best results, pass a combination of light and dark colors
-/// to contrast against.
+/// For best results, pass in a combination of light and dark colors
+/// to contrast against – 
+/// or define default `contrast-light` and `contrast-dark` values
+/// in your global `$colors` map.
 ///
 /// @group contrast
 ///
-/// @param {String | list} $color -
-///   The name of a color in your palette,
-///   with optional adjustments in the form of `(<function-name>: <args>)`.
-/// @param {Arglist} $options [#000, #fff] -
+/// @param {string | list} $color -
+///   The name or value of a color.
+/// @param {arglist} $options [#000, #fff] -
 ///   Two or more colors to contrast against.
-///   This function will choose the best contrast of all the options.
-///   Will use `contrast-light` and `contrast-dark` as defaults
+///   This function will choose the best contrast of all the options provided,
+///   or the `contrast-light` and `contrast-dark` defaults
 ///   if they are defined in your color palette,
 ///   otherwise `white` and `black` are the default options.
-/// @return {Color} -
+/// @return {color} -
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
 ///
 /// @example scss - default options
-///   @import '~mathsass/dist/math';
+///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     background: $background;
 ///     color: contrast($background);
 ///   }
 /// @example scss - explicit options
-///   @import '~mathsass/dist/math';
+///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     background: $background;
@@ -133,32 +100,34 @@ $wcag-contrast: (
 
 // Contrasted
 // ----------
-/// For any background color,
-/// select and apply the best contrasting text color from a set of options.
+/// Apply any background color,
+/// along with the highest-contraast text color from a set of options.
 /// This works the same as the `contrast` function,
-/// but applied the resulting values to `background-color`
+/// but applies the resulting values to `background-color`
 /// and text `color` properties.
 ///
 /// @group contrast
 ///
-/// @param {String | list} $background -
-///   The name of a color in your palette,
-///   with optional adjustments in the form of `(<function-name>: <args>)`.
-/// @param {Arglist} $options -
-///   Colors to contrast against.
+/// @param {string | list} $background -
+///   The name or value of your desired background color.
+/// @param {arglist} $options [#fff, #000] -
+///   A list of colors to contrast against,
+///   defaulting to `white` and `black`
+///   or your `contrast-light` and `contrast-dark` settings
+///   if they are prodided in the global `$colors` map.
 /// @output -
 ///   Sets the `background-color` to `$background`
 ///   and the foreground `color` to
 ///   whichever option has better contrast against the given background.
 ///
 /// @example scss - default options
-///   @import '~mathsass/dist/math';
+///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     @include contrasted($background);
 ///   }
 /// @example scss - explicit options
-///   @import '~mathsass/dist/math';
+///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
@@ -174,14 +143,79 @@ $wcag-contrast: (
 }
 
 
+// Contrast Ratio
+// --------------
+/// Compare two colors using the WCAG comparison algorythm,
+/// and return the resulting contrast-ratio.
+/// Optionally pass in a standard (AA, AAA, AA-large)
+/// and return `false` when the contrast-check fails.
+///
+/// - 'AA-large' == `3:1`
+/// - 'AA' == `4.5:1`
+/// - 'AAA' == `7:1`
+///
+/// @group contrast
+/// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef W3C Contrast Definition
+///
+/// @param {string | list | number} $color -
+///   The name of a color in your palette,
+///   any other color value,
+///   or even a pre-calculated numeric luminance.
+/// @param {string | list | number} $contrast -
+///   The name or value of a color to contrast against the first.
+/// @param {'AA' | 'AA-large' | 'AAA' | number | false} $require [false] -
+///   An optional WCAG contrast ratio to require.
+///   The function will return `false` if the required ratio is not met.
+/// @return {number} -
+///   The WCAG-defined contrast-ratio of two colors.
+///
+/// @example scss
+///   @import 'mathsass/dist/math';
+///   /* black and white: #{contrast-ratio(white, black)} */
+///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
+@function contrast-ratio(
+  $base,
+  $contrast,
+  $require: false
+) {
+  $is-lumins: (type-of($base) == 'number');
+
+  $base-lumin: if($is-lumins, $base, luminance($base));
+  $contrast-lumin: if($is-lumins, $contrast, luminance($contrast));
+
+  $darker: min($base-lumin, $contrast-lumin);
+  $lighter: max($base-lumin, $contrast-lumin);
+
+  $ratio: ($lighter + 0.05) / ($darker + 0.05);
+
+  @if (type-of($require) != 'number') {
+    $require: if($require == 'aaa', 'AAA', $require);
+    $require: if($require == 'aa', 'AA', $require);
+    $require: if($require == 'aa-large', 'AA-large', $require);
+
+    $require: map-get($WCAG-CONTRAST, $require);
+  }
+
+  @if $require and ($ratio < $require) {
+    @return false;
+  }
+
+  @return $ratio;
+}
+
+
 // Luminance
 // ---------
 /// Get the WCAG luminance of a color in your palette.
 ///
-/// **Warning**: Calculating luminance requires a `pow()` function
+/// Calculating luminance precisely requires a `pow()` function
 /// like the one available in
-/// [MathSass](https://github.com/terkel/mathsass/blob/master/dist/functions/_pow.scss),
+/// [MathSass][MathSass],
 /// which is not included in this library.
+/// We do provide an approximated fallback,
+/// but it's less precise.
+///
+/// [MathSass]: https://github.com/terkel/mathsass/blob/master/dist/functions/_pow.scss
 ///
 /// @group contrast
 /// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
