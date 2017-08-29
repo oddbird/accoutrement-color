@@ -29,11 +29,11 @@
 // Get Function [function]
 // -----------------------
 @include test-module('Get Function [function]') {
-  $test: _ac-color-get-function('size');
-  $expect: 'size';
+  $test: _ac-color-get-function('color');
+  $expect: 'color';
 
   @if function-exists('get-function') {
-    $expect: get-function('size');
+    $expect: get-function('color');
 
     @include test('Functions are returned without change') {
       @include assert-equal(
@@ -48,7 +48,7 @@
 
   @include test('Returned function or name is callable') {
     @include assert-equal(
-      call($test, 'root'),
-      size('root'));
+      call($test, 'blue'),
+      color('blue'));
   }
 }
