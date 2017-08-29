@@ -80,7 +80,7 @@ $blue-pow: decimal-round(luminance(#3492a1), 2);
       $inspect: true);
 
     @include assert-true(
-      ($blue-pow - $blue-approx) <= 0.01
+      abs($blue-pow - $blue-approx) <= 0.01
       );
   }
 }
