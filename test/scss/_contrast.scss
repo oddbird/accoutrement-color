@@ -1,87 +1,94 @@
 // Contrast Tests
 // ==============
 
-@function decimal-round(
-  $number,
-  $digits: 2
-) {
-  $n: 1;
 
-  @for $i from 1 through $digits {
-    $n: $n * 10;
+// This is all kinda ugly,
+// trying to test our luminance approximation…
+$ac-color-no-warnings: true;
+
+@function in-range(
+  $one,
+  $two,
+  $range
+) {
+  $result: abs($one - $two) <= $range;
+
+  @if ($result == false) {
+    @debug abs($one - $two);
   }
 
-  @return round($number * $n) / $n;
+  @return $result;
 }
 
-$white-approx: decimal-round(luminance(#fff), 2);
-$black-approx: decimal-round(luminance(#000), 2);
-$yellow-approx: decimal-round(luminance(#ff0), 2);
-$green-approx: decimal-round(luminance(#0f0), 2);
-$blue-approx: decimal-round(luminance(#3492a1), 2);
+$test-colors: ();
+
+@for $hue from 1 through 36 {
+  $hue: random($hue * 10);
+
+  @for $val from 1 through (100 / 20) {
+    $val: random($val * 10);
+    $val: $val * 1%;
+    $hsl: hsl($hue, $val, $val / 2);
+    $test-colors: append($test-colors, $hsl);
+  }
+}
+
+$approx: ();
+@each $c in $test-colors {
+  $approx: append($approx, luminance($c));
+}
 
 @import '../../node_modules/mathsass/dist/math';
 
-$white-pow: decimal-round(luminance(#fff), 2);
-$black-pow: decimal-round(luminance(#000), 2);
-$yellow-pow: decimal-round(luminance(#ff0), 2);
-$green-pow: decimal-round(luminance(#0f0), 2);
-$blue-pow: decimal-round(luminance(#3492a1), 2);
+$pow: ();
+@each $c in $test-colors {
+  $pow: append($pow, luminance($c));
+}
+
 
 // Luminance [function]
 // --------------------
 @include test-module('Luminance [function]') {
   @include test('Returns proper luminance of a color') {
     @include assert-equal(
-      $white-pow,
+      luminance(#fff),
       1,
+      'white',
       $inspect: true);
 
     @include assert-equal(
-      $black-pow,
+      luminance(#000),
       0,
+      'black',
       $inspect: true);
 
     @include assert-equal(
-      $yellow-pow,
-      0.93,
+      luminance(#ff0),
+      0.9278,
+      'yellow',
       $inspect: true);
 
     @include assert-equal(
-      $green-pow,
-      0.72,
+      luminance(#0f0),
+      0.7152,
+      'green',
       $inspect: true);
 
     @include assert-equal(
-      $blue-pow,
-      0.24,
+      luminance(#3492a1),
+      0.23861,
+      'blue',
       $inspect: true);
   }
 
   @include test('Returns approximate luminance of a color') {
-    @include assert-equal(
-      $white-approx,
-      1,
-      $inspect: true);
-
-    @include assert-equal(
-      $black-approx,
-      0,
-      $inspect: true);
-
-    @include assert-equal(
-      $yellow-approx,
-      0.93,
-      $inspect: true);
-
-    @include assert-equal(
-      $green-approx,
-      0.72,
-      $inspect: true);
-
-    @include assert-true(
-      abs($blue-pow - $blue-approx) <= 0.01
-      );
+    @for $i from 1 through length($approx) {
+      $a: nth($approx, $i);
+      $p: nth($pow, $i);
+      @include assert-true(
+        in-range($a, $p, 0.0178),
+        '#{$a} vs #{$p}');
+    }
   }
 }
 
@@ -91,53 +98,35 @@ $blue-pow: decimal-round(luminance(#3492a1), 2);
 @include test-module('Contrast Ratio [function]') {
   @include test('Returns contrast ratio between two colors') {
     @include assert-equal(
+      contrast-ratio(#fff, #fff),
+      1,
+      'Any color has a contrast of 1 with itself.');
+
+    @include assert-equal(
       contrast-ratio(#000, #fff),
       21,
       'Black and white have a contrast of 21.');
   }
 
-  @include test('Approximation and proper math have a ratio close to 1') {
-    @include assert-equal(
-      round(contrast-ratio($white-approx, $white-pow)),
-      1,
-      'white');
-
-    @include assert-equal(
-      round(contrast-ratio($black-approx, $black-pow)),
-      1,
-      'black');
-
-    @include assert-equal(
-      round(contrast-ratio($yellow-approx, $yellow-pow)),
-      1,
-      'yellow');
-
-    @include assert-equal(
-      round(contrast-ratio($green-approx, $green-pow)),
-      1,
-      'green');
-
-    @include assert-equal(
-      round(contrast-ratio($blue-approx, $blue-pow)),
-      1,
-      'blue');
-  }
-
   @include test('Approximation and proper math return similar ratios') {
-    @include assert-equal(
-      round(contrast-ratio($white-approx, $blue-approx)),
-      round(contrast-ratio($white-pow, $blue-pow))
-      );
+    @for $i from 1 through length($test-colors) {
+      $c1: nth($test-colors, $i);
+      $a1: nth($approx, $i);
+      $p1: nth($pow, $i);
 
-    @include assert-equal(
-      round(contrast-ratio($black-approx, $yellow-approx)),
-      round(contrast-ratio($black-pow, $yellow-pow))
-      );
+      $i2: 0 - $i;
+      $c2: nth($test-colors, $i2);
+      $a2: nth($approx, $i2);
+      $p2: nth($pow, $i2);
 
-    @include assert-equal(
-      round(contrast-ratio($green-approx, $blue-approx)),
-      round(contrast-ratio($green-pow, $blue-pow))
-      );
+      @include assert-true(
+        in-range(
+          contrast-ratio($a1, $a2),
+          contrast-ratio($p1, $p2),
+          0.524
+        ),
+        '#{$c1} vs #{$c2}');
+    }
   }
 }
 

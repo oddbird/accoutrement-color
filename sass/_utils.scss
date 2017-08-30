@@ -55,9 +55,11 @@
 @function _approximate-pow(
   $base
 ) {
-  @warn 'Luminance and contrast calculations require a `pow()` '
-  + 'function like the one available from MathSass. Falling back to '
-  + 'rough approximation';
+  @if not global-variable-exists('ac-color-no-warnings') {
+    @warn 'Luminance and contrast calculations require a `pow()` '
+    + 'function like the one available from MathSass. Falling back to '
+    + 'rough approximation';
+  }
 
   $value: 0.56 * ($base * $base * $base) + 0.44 * ($base * $base);
 

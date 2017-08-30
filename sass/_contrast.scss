@@ -7,7 +7,12 @@
 /// We recommend installing the [MathSass][MathSass] library
 /// or a similar `pow()` function –
 /// otherwise we will fallback on a simple approximation
-/// with less precise results.
+/// with less precise results:
+///
+/// - Approximated Luminance (0 to 1) has a maximum margin-of-error
+///   around `0.0178` (`1.77%`)
+/// - Approximated Contrast-Ratio (1 to 21) has a maximum margin-of-error
+///   around `0.524` (`2.62%`)
 ///
 /// [MathSass]: https://github.com/terkel/mathsass/
 ///
