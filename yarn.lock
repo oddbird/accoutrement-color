@@ -2112,10 +2112,6 @@ marked@^0.3.0:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
-mathsass@0.9.5:
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/mathsass/-/mathsass-0.9.5.tgz#a63ebe022171eaf82e3d57b5f2ad3d687e347a3e"
-
 memoize-decorator@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/memoize-decorator/-/memoize-decorator-1.0.2.tgz#605a41715c4171db192a90098b00ab8d6e1102f5"
@@ -3001,10 +2997,6 @@ sassdoc@2.2.0:
     update-notifier "^1.0.3"
     vinyl-fs "^2.4.4"
     vinyl-source-stream "^1.0.0"
-
-sassdocify@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/sassdocify/-/sassdocify-0.3.4.tgz#d965444d1ac90ad9ec98f55d85644bb6909c7f12"
 
 scss-comment-parser@^0.8.1:
   version "0.8.3"

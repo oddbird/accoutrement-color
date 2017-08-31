@@ -13,7 +13,8 @@ Accoutrement-Color
 
 OddBird's Accoutrement toolkits are designed around the idea
 that code should be meaningful to both humans and machines –
-opening the door for automation.
+opening the door for automation,
+while improving or maintaining readability.
 These tools integrate with [Herman][Herman],
 our automated living patter-library generator
 built on [SassDoc][SassDoc].
@@ -29,8 +30,7 @@ built on [SassDoc][SassDoc].
 - [Scale](http://oddbird.net/accoutrement-scale/)
   helps manage scale patterns like font-sizes, margins, and gutters.
 - [Type](http://oddbird.net/accoutrement-type/)
-  provides webfont management t
-  ools,
+  provides webfont management tools,
   and other typography helpers.
 - [Layout](http://oddbird.net/accoutrement-layout/)
   provides layout utilities such as
@@ -38,8 +38,8 @@ built on [SassDoc][SassDoc].
   named media-queries, and a clearfix.
 
 
-Quick Start Guide
------------------
+Quick Start: Colors
+-------------------
 
 Install the package with npm or yarn:
 
@@ -76,11 +76,7 @@ Access your colors from anywhere:
 
 ```scss
 .example {
-  // call any color
   border-color: color('border');
-
-  // adjust on the fly
-  color: color('brand-pink' ('saturate': -15%));
 }
 ```
 
@@ -102,22 +98,18 @@ $patterns: (
   'link': 'brand-pink' ('shade': 25%),
 );
 
-// use the function to return a single map:
-$colors: merge-colors($brand, $patterns);
-
-// or use the mixin to add everything to $colors automatically:
+// merge everything into the main $colors map…
 @include add-colors($brand, $patterns);
 ```
 
-We'll even help you calculate WCAG-appropriate color contrasts
-(this feature requires a `pow()` function
-like the one available in [MathSass][mathsass]).
+We'll also help you calculate WCAG-appropriate color contrasts:
 
 ```scss
 a:hover {
   // set a background, and get well-contrasted text
   @include contrasted('link');
+
+  // or return a contrasting color for use anywhere…
+  border-color: contrast('background');
 }
 ```
-
-[mathsass]: https://github.com/terkel/mathsass

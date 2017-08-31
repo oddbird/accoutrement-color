@@ -50,23 +50,6 @@
 }
 
 
-// Approximate Pow
-// ---------------
-@function _approximate-pow(
-  $base
-) {
-  @if not global-variable-exists('ac-color-no-warnings') {
-    @warn 'Luminance and contrast calculations require a `pow()` '
-    + 'function like the one available from MathSass. Falling back to '
-    + 'rough approximation';
-  }
-
-  $value: 0.56 * ($base * $base * $base) + 0.44 * ($base * $base);
-
-  @return $value
-}
-
-
 // Get Function
 // ------------
 /// Get a first-class function in Sass 3.5+,

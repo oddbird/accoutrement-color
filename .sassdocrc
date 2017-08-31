@@ -7,11 +7,11 @@ display:
 
 groups:
   a-config: Configuration
-  colors: Color API
+  colors: Accessing Colors
   contrast: Contrast Utilities
   util: Tint & Shade
 
 herman:
   sass:
-    includepaths: ['sass', 'node_modules']
+    includepaths: ['sass']
     includes: ['color']

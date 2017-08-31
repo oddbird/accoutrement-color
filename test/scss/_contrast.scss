@@ -2,50 +2,6 @@
 // ==============
 
 
-// This is all kinda ugly,
-// trying to test our luminance approximation…
-$ac-color-no-warnings: true;
-
-@function in-range(
-  $one,
-  $two,
-  $range
-) {
-  $result: abs($one - $two) <= $range;
-
-  @if ($result == false) {
-    @debug abs($one - $two);
-  }
-
-  @return $result;
-}
-
-$test-colors: ();
-
-@for $hue from 1 through 36 {
-  $hue: random($hue * 10);
-
-  @for $val from 1 through (100 / 20) {
-    $val: random($val * 10);
-    $val: $val * 1%;
-    $hsl: hsl($hue, $val, $val / 2);
-    $test-colors: append($test-colors, $hsl);
-  }
-}
-
-$approx: ();
-@each $c in $test-colors {
-  $approx: append($approx, luminance($c));
-}
-
-@import '../../node_modules/mathsass/dist/math';
-
-$pow: ();
-@each $c in $test-colors {
-  $pow: append($pow, luminance($c));
-}
-
-
 // Luminance [function]
 // --------------------
 @include test-module('Luminance [function]') {
@@ -54,41 +10,36 @@ $pow: ();
       luminance(#fff),
       1,
       'white',
-      $inspect: true);
+      $inspect: true
+    );
 
     @include assert-equal(
       luminance(#000),
       0,
       'black',
-      $inspect: true);
+      $inspect: true
+    );
 
     @include assert-equal(
       luminance(#ff0),
       0.9278,
       'yellow',
-      $inspect: true);
+      $inspect: true
+    );
 
     @include assert-equal(
       luminance(#0f0),
       0.7152,
       'green',
-      $inspect: true);
+      $inspect: true
+    );
 
     @include assert-equal(
       luminance(#3492a1),
       0.23861,
       'blue',
-      $inspect: true);
-  }
-
-  @include test('Returns approximate luminance of a color') {
-    @for $i from 1 through length($approx) {
-      $a: nth($approx, $i);
-      $p: nth($pow, $i);
-      @include assert-true(
-        in-range($a, $p, 0.0178),
-        '#{$a} vs #{$p}');
-    }
+      $inspect: true
+    );
   }
 }
 
@@ -100,33 +51,14 @@ $pow: ();
     @include assert-equal(
       contrast-ratio(#fff, #fff),
       1,
-      'Any color has a contrast of 1 with itself.');
+      'Any color has a contrast of 1 with itself.'
+    );
 
     @include assert-equal(
       contrast-ratio(#000, #fff),
       21,
-      'Black and white have a contrast of 21.');
-  }
-
-  @include test('Approximation and proper math return similar ratios') {
-    @for $i from 1 through length($test-colors) {
-      $c1: nth($test-colors, $i);
-      $a1: nth($approx, $i);
-      $p1: nth($pow, $i);
-
-      $i2: 0 - $i;
-      $c2: nth($test-colors, $i2);
-      $a2: nth($approx, $i2);
-      $p2: nth($pow, $i2);
-
-      @include assert-true(
-        in-range(
-          contrast-ratio($a1, $a2),
-          contrast-ratio($p1, $p2),
-          0.524
-        ),
-        '#{$c1} vs #{$c2}');
-    }
+      'Black and white have a contrast of 21.'
+    );
   }
 }
 
@@ -138,14 +70,16 @@ $pow: ();
     @include assert-equal(
       contrast(#eee),
       color('contrast-dark'),
-      'Returns a dark color to contrast a light one.');
+      'Returns a dark color to contrast a light one.'
+    );
   }
 
   @include test('Light on dark') {
     @include assert-equal(
       contrast('dark'),
       color('contrast-light'),
-      'Returns a light color to contrast a dark one.');
+      'Returns a light color to contrast a dark one.'
+    );
   }
 
   $original-colors: $colors;
@@ -155,14 +89,16 @@ $pow: ();
     @include assert-equal(
       contrast(#000),
       #fff,
-      'Returns white for light contrast when none is given.');
+      'Returns white for light contrast when none is given.'
+    );
   }
 
   @include test('Default dark fallback') {
     @include assert-equal(
       contrast(#fff),
       #000,
-      'Returns black for dark contrast when none is given.');
+      'Returns black for dark contrast when none is given.'
+    );
   }
 
   $colors: $original-colors !global;
@@ -171,7 +107,8 @@ $pow: ();
     @include assert-equal(
       contrast('primary', #ff0, #fcc, #0f0, 'light', #003),
       #003,
-      'Returns the best option from the list.');
+      'Returns the best option from the list.'
+    );
   }
 }
 

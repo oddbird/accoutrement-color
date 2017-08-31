@@ -12,7 +12,7 @@
     @include assert-equal(
       merge-colors($a, $b),
       map-merge($a, $b)
-      );
+    );
   }
 }
 
@@ -30,7 +30,7 @@
     @include assert-equal(
       $colors,
       map-merge($colors, map-merge($a, $b))
-      );
+    );
   }
 
   $colors: $old !global;

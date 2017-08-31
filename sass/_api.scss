@@ -4,32 +4,37 @@
 
 // Color
 // -----
-/// This is the primary API function for
+/// The primary function for
 /// accessing colors in your palette,
 /// or making adjustments on the fly.
 ///
-/// This `color` function isn't just a wrapper for `map-get()`,
-/// but also handles internal color-references and functional adjustments.
-/// We provide access to the global `$colors` map by default,
-/// but you can also pass in arbitrary palettes when you need.
+/// This is more than a wrapper for `map-get($colors, $x)`.
+/// It also handles internal color-references, recursion,
+/// and functional color-adjustments.
+/// It has access to the global `$colors` map by default,
+/// but you can also pass in arbitrary color-palette maps as well.
 ///
 /// @group colors
 ///
 /// @parameter {string | list} $color -
 ///   The name of a color in your palette,
-///   or a valid css color-value,
-///   with optional adjustments
-///   in the form of `<origin-color> (<function>: <args...>)`.
+///   or a color description in the
+///   [map configuration format](config.html).
 ///
 /// @parameter {map} $palette [$colors] -
-///   A map containing the source color-palette
-///   for accessing previously-defined colors.
+///   Optional map containing the source color-palette.
+///   Defaults to the global `$colors` map.
 ///
 /// @return {color} -
 ///   A calculated css-ready color,
 ///   based on your global color palette and adjustments.
 ///
 /// @example scss
+///   $colors: (
+///     'background': #eee,
+///     'text': #222,
+///   );
+///
 ///   html {
 ///     background: color('background');
 ///     color: color('text');

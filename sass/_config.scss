@@ -5,25 +5,28 @@
 
 // Color Map
 // ---------
-/// This is the primary global map of colors
-/// used on your project.
-/// Any colors added to the `$colors` map will be available
+/// A variable storing the map of
+/// all colors globally-avialble on your project.
+/// Any colors added to the `$colors` map will be accesible
 /// to the `color()` function by default.
 ///
 /// Define each color with a `name`, `base-value`,
 /// and optional `adjustments`…
 ///
-/// - Name your colors anything.
-///   We create semantic layers: from abstractly-defined `brand-pink`,
-///   to concrete use-cases like `link` and `focus`.
-/// - Base values can be CSS-ready colors (hex, rgb, hsla),
+/// ```
+/// $colors: (
+///   'color-name': <base-value>,
+///   'color-two': <base-value> ('<color-function>': '<arguments>'),
+///   // will return: function-name($base-value, $arguments...)
+/// );
+/// ```
+///
+/// - Name your colors anything – from abstractions like `brand-pink`,
+///   to concrete patterns like `button` or `widget-background`.
+/// - Base-values can be CSS-ready colors (hex, rgb, hsla),
 ///   or references other colors in the map.
 /// - Adjustments are a nested map of color functions and arguments,
-///   using the `<origin-color> (<function-name>: <args...>)` syntax.
-/// - Adjustment functions will be called in this format:
-///   `function-name($origin-color, $args...)`,
-///   which works with all Sass core color functions,
-///   as well as our `tint` and `shade` functions.
+///   for adjusting colors directly in your palette.
 ///
 /// The color-names `contrast-light` and `contrast-dark` are special.
 /// Use those names to define the default light-and-dark options
@@ -77,16 +80,16 @@ $colors: () !default;
 ///
 /// @example scss
 ///   $brand-colors: (
-///     'brand-pink': hsl(330, 85%, 62%),
-///     'brand-light': #fff,
 ///     'brand-dark': #222,
+///     'brand-pink': hsl(330, 85%, 62%),
 ///   );
+///
 ///   $text-colors: (
-///     'background': 'brand-light',
 ///     'text': 'brand-dark',
 ///     'link': 'brand-pink',
 ///   );
-///   @include add-colors($brand-colors, $text-colors)
+///
+///   @include add-colors($brand-colors, $text-colors);
 @mixin add-colors (
   $maps...
 ) {
@@ -112,6 +115,18 @@ $colors: () !default;
 ///   Pass any number of maps to be merged.
 /// @return {map} -
 ///   The merged map of colors.
+/// @example scss
+///   $brand-colors: (
+///     'brand-dark': #222,
+///     'brand-pink': hsl(330, 85%, 62%),
+///   );
+///
+///   $text-colors: (
+///     'text': 'brand-dark',
+///     'link': 'brand-pink',
+///   );
+///
+///   $colors: merge-colors($brand-colors, $text-colors);
 @function merge-colors(
   $maps...
 ) {

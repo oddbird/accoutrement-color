@@ -2,23 +2,6 @@
 // ==============
 
 
-/// **Note:**
-/// Color luminocity & contrast calculations require exponential math.
-/// We recommend installing the [MathSass][MathSass] library
-/// or a similar `pow()` function –
-/// otherwise we will fallback on a simple approximation
-/// with less precise results:
-///
-/// - Approximated Luminance (0 to 1) has a maximum margin-of-error
-///   around `0.0178` (`1.77%`)
-/// - Approximated Contrast-Ratio (1 to 21) has a maximum margin-of-error
-///   around `0.524` (`2.62%`)
-///
-/// [MathSass]: https://github.com/terkel/mathsass/
-///
-/// @group contrast
-
-
 // WCAG Contrast
 // -------------
 /// These named contrast-ratios are defined by the [WCAG][WCAG].
@@ -55,14 +38,12 @@ $WCAG-CONTRAST: (
 ///   Whichever color-option has the highest contrast-ratio to `$color`.
 ///
 /// @example scss - default options
-///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     background: $background;
 ///     color: contrast($background);
 ///   }
 /// @example scss - explicit options
-///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     background: $background;
@@ -126,13 +107,11 @@ $WCAG-CONTRAST: (
 ///   whichever option has better contrast against the given background.
 ///
 /// @example scss - default options
-///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     @include contrasted($background);
 ///   }
 /// @example scss - explicit options
-///   @import 'mathsass/dist/math';
 ///   $background: #333;
 ///   html {
 ///     @include contrasted($background, red, orange, yellow, green, blue, indigo);
@@ -175,7 +154,6 @@ $WCAG-CONTRAST: (
 ///   The WCAG-defined contrast-ratio of two colors.
 ///
 /// @example scss
-///   @import 'mathsass/dist/math';
 ///   /* black and white: #{contrast-ratio(white, black)} */
 ///   /* failed 'AAA': #{contrast-ratio(white, #999, 'AAA')} */
 @function contrast-ratio(
@@ -213,15 +191,6 @@ $WCAG-CONTRAST: (
 // ---------
 /// Get the WCAG luminance of a color in your palette.
 ///
-/// Calculating luminance precisely requires a `pow()` function
-/// like the one available in
-/// [MathSass][MathSass],
-/// which is not included in this library.
-/// We do provide an approximated fallback,
-/// but it's less precise.
-///
-/// [MathSass]: https://github.com/terkel/mathsass/blob/master/dist/functions/_pow.scss
-///
 /// @group contrast
 /// @link http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef WCAG Relative Luminance
 ///
@@ -246,11 +215,7 @@ $WCAG-CONTRAST: (
       $value: $value / 12.92;
     } @else {
       $base: ($value + 0.055) / 1.055;
-      @if function-exists('pow') {
-        $value: pow($base, 2.4);
-      } @else {
-        $value: _approximate-pow($base);
-      }
+      $value: _acc-pow($base, 2.4);
     }
 
     @if ($component == 'red') {
