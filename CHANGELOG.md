@@ -1,7 +1,7 @@
 Accoutrement-Color Changelog
 ============================
 
-2.2.0 - 08/26/17
+2.2.0 - 09/05/17
 ----------------
 - DOCS: Update theme, organize, and expand examples
 - NEW: Added (private) `pow()` functions,
