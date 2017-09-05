@@ -9,7 +9,7 @@
 /// [WCAG]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
 ///
 /// @access private
-$WCAG-CONTRAST: (
+$WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
   'AA-large': 3,
   'AA': 4.5,
   'AAA': 7,
@@ -176,7 +176,7 @@ $WCAG-CONTRAST: (
     $require: if($require == 'aa', 'AA', $require);
     $require: if($require == 'aa-large', 'AA-large', $require);
 
-    $require: map-get($WCAG-CONTRAST, $require);
+    $require: map-get($WCAG-CONTRAST, $require); // sass-lint:disable-line variable-name-format
   }
 
   @if $require and ($ratio < $require) {

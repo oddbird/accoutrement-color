@@ -10,8 +10,8 @@
 
 // Constants
 // ---------
-$_LN2: 0.6931471805599453;
-$_SQRT2: 1.4142135623730951;
+$_LN2: 0.6931471805599453; // sass-lint:disable-line variable-name-format
+$_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 
 
 /// Returns base to the exponent power.
@@ -93,10 +93,10 @@ $_SQRT2: 1.4142135623730951;
   @if $x <= 0 {
     @return 0 / 0;
   }
-  $k: nth(_acc-frexp($x / $_SQRT2), 2);
+  $k: nth(_acc-frexp($x / $_SQRT2), 2); // sass-lint:disable-line variable-name-format
   $x: $x / _acc-ldexp(1, $k);
 
-  @return $_LN2 * $k + _acc-log-approx($x);
+  @return $_LN2 * $k + _acc-log-approx($x); // sass-lint:disable-line variable-name-format
 }
 
 
