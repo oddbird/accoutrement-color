@@ -1,19 +1,45 @@
 Accoutrement-Color
 ==================
 
-Sass color [Accoutrement][accoutrement]
-by [OddBird][oddbird].
-Gather all your colors into a single map,
-access them by name,
-and check for [WCAG-appropriate][wcag] contrast.
+**Sass color-palette management by [OddBird][oddbird]…**
 
-[accoutrement]: http://oddbird.net/open-source/accoutrement/
+- Organize all your colors into a single map, or set of maps
+- Document color relationships directly in the code
+- Automate [WCAG-appropriate][wcag] contrast checking
+- Generate color-palette documentation with [Herman][Herman]
+
 [oddbird]: http://oddbird.net/
 [wcag]: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
 
+OddBird's Accoutrement toolkits are designed around the idea
+that code should be meaningful to both humans and machines –
+opening the door for automation,
+while improving or maintaining readability.
+These tools integrate with [Herman][Herman],
+our automated living patter-library generator
+built on [SassDoc][SassDoc].
 
-Quick Start
------------
+[Herman]: http://oddbird.net/herman/
+[SassDoc]: http://sassdoc.com/
+
+
+**Other Accoutrement include…**
+
+- [Init](http://oddbird.net/accoutrement-init/)
+  provides light-weight browser-normalization.
+- [Scale](http://oddbird.net/accoutrement-scale/)
+  helps manage scale patterns like font-sizes, margins, and gutters.
+- [Type](http://oddbird.net/accoutrement-type/)
+  provides webfont management tools,
+  and other typography helpers.
+- [Layout](http://oddbird.net/accoutrement-layout/)
+  provides layout utilities such as
+  box-sizing, intrinsic ratios, z-index management,
+  named media-queries, and a clearfix.
+
+
+Quick Start: Colors
+-------------------
 
 Install the package with npm or yarn:
 
@@ -50,11 +76,7 @@ Access your colors from anywhere:
 
 ```scss
 .example {
-  // call any color
   border-color: color('border');
-
-  // adjust on the fly
-  color: color('brand-pink' ('saturate': -15%));
 }
 ```
 
@@ -76,22 +98,18 @@ $patterns: (
   'link': 'brand-pink' ('shade': 25%),
 );
 
-// use the function to return a single map:
-$colors: merge-colors($brand, $patterns);
-
-// or use the mixin to add everything to $colors automatically:
+// merge everything into the main $colors map…
 @include add-colors($brand, $patterns);
 ```
 
-We'll even help you calculate WCAG-appropriate color contrasts
-(this feature requires a `pow()` function
-like the one available in [MathSass][mathsass]).
+We'll also help you calculate WCAG-appropriate color contrasts:
 
 ```scss
 a:hover {
   // set a background, and get well-contrasted text
   @include contrasted('link');
+
+  // or return a contrasting color for use anywhere…
+  border-color: contrast('background');
 }
 ```
-
-[mathsass]: https://github.com/terkel/mathsass

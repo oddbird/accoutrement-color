@@ -7,7 +7,7 @@ display:
 
 groups:
   a-config: Configuration
-  colors: Color API
+  colors: Accessing Colors
   contrast: Contrast Utilities
   util: Tint & Shade
 

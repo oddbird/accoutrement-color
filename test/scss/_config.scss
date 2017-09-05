@@ -4,33 +4,33 @@
 
 // Merge Colors [function]
 // -----------------------
-@include test-module('Merge Colors [function]') {
+@include describe('Merge Colors [function]') {
   $a: ('red': #f33);
   $b: ('green': #3f3);
 
-  @include test('Merges colors into a single map') {
+  @include it('Merges colors into a single map') {
     @include assert-equal(
       merge-colors($a, $b),
       map-merge($a, $b)
-      );
+    );
   }
 }
 
 
 // Add Colors [mixin]
 // ------------------
-@include test-module('Add Colors [mixin]') {
+@include describe('Add Colors [mixin]') {
   $old: $colors;
   $a: ('red': #f33);
   $b: ('green': #3f3);
 
   @include add-colors($a, $b);
 
-  @include test('Merges colors, and updates global variable') {
+  @include it('Merges colors, and updates global variable') {
     @include assert-equal(
       $colors,
       map-merge($colors, map-merge($a, $b))
-      );
+    );
   }
 
   $colors: $old !global;
