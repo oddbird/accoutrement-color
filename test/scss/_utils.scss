@@ -4,8 +4,8 @@
 
 // Tint [function]
 // ---------------
-@include test-module('Tint [function]') {
-  @include test('Adjusts the tint of a color') {
+@include describe('Tint [function]') {
+  @include it('Adjusts the tint of a color') {
     @include assert-equal(
       tint('primary', 25%),
       mix(#fff, color('primary'), 25%),
@@ -17,8 +17,8 @@
 
 // Shade [function]
 // ----------------
-@include test-module('Shade [function]') {
-  @include test('Adjusts the shade of a color') {
+@include describe('Shade [function]') {
+  @include it('Adjusts the shade of a color') {
     @include assert-equal(
       shade('primary', 25%),
       mix(#000, color('primary'), 25%),
@@ -30,14 +30,14 @@
 
 // Get Function [function]
 // -----------------------
-@include test-module('Get Function [function]') {
+@include describe('Get Function [function]') {
   $test: _ac-color-get-function('color');
   $expect: 'color';
 
   @if function-exists('get-function') {
     $expect: get-function('color');
 
-    @include test('Functions are returned without change') {
+    @include it('Functions are returned without change') {
       @include assert-equal(
         _ac-color-get-function($expect),
         $expect
@@ -45,11 +45,11 @@
     }
   }
 
-  @include test('Returns a function or function-name') {
+  @include it('Returns a function or function-name') {
     @include assert-equal($test, $expect);
   }
 
-  @include test('Returned function or name is callable') {
+  @include it('Returned function or name is callable') {
     @include assert-equal(
       call($test, 'blue'),
       color('blue')

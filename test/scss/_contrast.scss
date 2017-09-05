@@ -4,8 +4,8 @@
 
 // Luminance [function]
 // --------------------
-@include test-module('Luminance [function]') {
-  @include test('Returns proper luminance of a color') {
+@include describe('Luminance [function]') {
+  @include it('Returns proper luminance of a color') {
     @include assert-equal(
       luminance(#fff),
       1,
@@ -46,8 +46,8 @@
 
 // Contrast Ratio [function]
 // -------------------------
-@include test-module('Contrast Ratio [function]') {
-  @include test('Returns contrast ratio between two colors') {
+@include describe('Contrast Ratio [function]') {
+  @include it('Returns contrast ratio between two colors') {
     @include assert-equal(
       contrast-ratio(#fff, #fff),
       1
@@ -59,7 +59,7 @@
     );
   }
 
-  @include test('Returns contrast ratio if test is met') {
+  @include it('Returns contrast ratio if test is met') {
     @include assert-equal(
       contrast-ratio(#333, #999, 'aa-large'),
       4.43472,
@@ -67,7 +67,7 @@
     );
   }
 
-  @include test('Returns false if test is not met') {
+  @include it('Returns false if test is not met') {
     @include assert-equal(
       contrast-ratio(#333, #999, 'AAA'),
       false
@@ -78,8 +78,8 @@
 
 // Contrast [function]
 // -------------------
-@include test-module('Contrast [function]') {
-  @include test('Dark on light') {
+@include describe('Contrast [function]') {
+  @include it('Dark on light') {
     @include assert-equal(
       contrast(#eee),
       color('contrast-dark'),
@@ -87,7 +87,7 @@
     );
   }
 
-  @include test('Light on dark') {
+  @include it('Light on dark') {
     @include assert-equal(
       contrast('dark'),
       color('contrast-light'),
@@ -98,7 +98,7 @@
   $original-colors: $colors;
   $colors: () !global;
 
-  @include test('Default light fallback') {
+  @include it('Default light fallback') {
     @include assert-equal(
       contrast(#000),
       #fff,
@@ -106,7 +106,7 @@
     );
   }
 
-  @include test('Default dark fallback') {
+  @include it('Default dark fallback') {
     @include assert-equal(
       contrast(#fff),
       #000,
@@ -116,7 +116,7 @@
 
   $colors: $original-colors !global;
 
-  @include test('Multiple contrast options') {
+  @include it('Multiple contrast options') {
     @include assert-equal(
       contrast('primary', #ff0, #fcc, #0f0, 'light', #003),
       #003,
@@ -128,8 +128,8 @@
 
 // Contrasted [mixin]
 // ------------------
-@include test-module('contrasted [mixin]') {
-  @include test('Dark on light') {
+@include describe('contrasted [mixin]') {
+  @include it('Dark on light') {
     @include assert('Use a dark color on a light background.') {
       @include output {
         @include contrasted(#eee);
@@ -142,7 +142,7 @@
     }
   }
 
-  @include test('Light on dark') {
+  @include it('Light on dark') {
     @include assert('Use a light color on a dark background.') {
       @include output {
         @include contrasted('dark');
