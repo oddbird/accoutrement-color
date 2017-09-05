@@ -162,6 +162,11 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
   $require: false
 ) {
   $is-lumins: (type-of($base) == 'number');
+  $uppercase: (
+    'aaa': 'AAA',
+    'aa': 'AA',
+    'aa-large': 'AA-large'
+  );
 
   $base-lumin: if($is-lumins, $base, luminance($base));
   $contrast-lumin: if($is-lumins, $contrast, luminance($contrast));
@@ -172,10 +177,7 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
   $ratio: ($lighter + 0.05) / ($darker + 0.05);
 
   @if (type-of($require) != 'number') {
-    $require: if($require == 'aaa', 'AAA', $require);
-    $require: if($require == 'aa', 'AA', $require);
-    $require: if($require == 'aa-large', 'AA-large', $require);
-
+    $require: map-get($uppercase, $require) or $require;
     $require: map-get($WCAG-CONTRAST, $require); // sass-lint:disable-line variable-name-format
   }
 

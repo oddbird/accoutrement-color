@@ -50,14 +50,27 @@
   @include test('Returns contrast ratio between two colors') {
     @include assert-equal(
       contrast-ratio(#fff, #fff),
-      1,
-      'Any color has a contrast of 1 with itself.'
+      1
     );
 
     @include assert-equal(
       contrast-ratio(#000, #fff),
-      21,
-      'Black and white have a contrast of 21.'
+      21
+    );
+  }
+
+  @include test('Returns contrast ratio if test is met') {
+    @include assert-equal(
+      contrast-ratio(#333, #999, 'aa-large'),
+      4.43472,
+      $inspect: true
+    );
+  }
+
+  @include test('Returns false if test is not met') {
+    @include assert-equal(
+      contrast-ratio(#333, #999, 'AAA'),
+      false
     );
   }
 }
