@@ -1,6 +1,11 @@
 Accoutrement-Color Changelog
 ============================
 
+UNRELEASED
+----------
+- INTERNAL: Simplify get-function logic
+
+
 2.2.0 - 09/05/17
 ----------------
 - DOCS: Update theme, organize, and expand examples

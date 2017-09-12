@@ -75,17 +75,13 @@
 
   @if ($type == 'function') {
     @return $function;
-  } @else if ($type == 'string') {
-    @if function-exists('get-function') {
-      @if index($local, $function) {
-        @return get-function($function);
-      } @else {
-        @error 'Please pass in a first-class function using `get-function`';
-      }
+  @if ($type == 'string') and function-exists('get-function') {
+    @if index($local, $function) {
+      @return get-function($function);
     }
 
-    @return $function;
+    @error '[#{$type}] `#{$function}` must be a first-class function';
   }
 
-  @error 'Invalid function-name, [#{$type}] `#{$function}` must be a function or string';
+  @return $function;
 }
