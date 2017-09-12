@@ -75,7 +75,7 @@
 
   @if ($type == 'function') {
     @return $function;
-  @if ($type == 'string') and function-exists('get-function') {
+  } @else if ($type == 'string') and function-exists('get-function') {
     @if index($local, $function) {
       @return get-function($function);
     }
