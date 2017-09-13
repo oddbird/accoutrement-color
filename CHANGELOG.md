@@ -1,9 +1,10 @@
 Accoutrement-Color Changelog
 ============================
 
-UNRELEASED
-----------
+2.2.1 - 09/13/17
+----------------
 - INTERNAL: Simplify get-function logic
+- DOCS: Fix broken source link
 
 
 2.2.0 - 09/05/17
@@ -18,7 +19,6 @@ UNRELEASED
 
 2.1.2 - 08/26/17
 ----------------
-
 - Docs: Update Herman, and simplify publication
 
 

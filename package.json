@@ -1,11 +1,11 @@
 {
   "name": "accoutrement-color",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Sass color-palette management and utilities.",
   "homepage": "http://oddbird.net/accoutrement-color/",
   "repository": {
     "type": "git",
-    "url": "git://github.com/oddbird/accoutrement-color.git"
+    "url": "https://github.com/oddbird/accoutrement-color.git"
   },
   "devDependencies": {
     "chalk": "1.1.1",
