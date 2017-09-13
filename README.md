@@ -16,7 +16,7 @@ that code should be meaningful to both humans and machines –
 opening the door for automation,
 while improving or maintaining readability.
 These tools integrate with [Herman][Herman],
-our automated living patter-library generator
+our automated living pattern-library generator
 built on [SassDoc][SassDoc].
 
 [Herman]: http://oddbird.net/herman/
@@ -26,7 +26,7 @@ built on [SassDoc][SassDoc].
 **Other Accoutrement include…**
 
 - [Init](http://oddbird.net/accoutrement-init/)
-  provides light-weight browser-normalization.
+  provides lightweight browser-normalization.
 - [Scale](http://oddbird.net/accoutrement-scale/)
   helps manage scale patterns like font-sizes, margins, and gutters.
 - [Type](http://oddbird.net/accoutrement-type/)
