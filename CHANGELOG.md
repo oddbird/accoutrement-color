@@ -1,6 +1,11 @@
 Accoutrement-Color Changelog
 ============================
 
+2.2.2 - 09/22/17
+----------------
+- BUGFIX: `color` function no longer chokes on self-reference in custom-palettes
+
+
 2.2.1 - 09/13/17
 ----------------
 - INTERNAL: Simplify get-function logic

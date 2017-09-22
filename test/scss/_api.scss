@@ -38,12 +38,28 @@
   }
 
   @include it('Multiple adjustment function arguments') {
-    $adjust: ('contrast': (#999, #666, #333)
+    $adjust: (
+      'contrast': (#999, #666, #333),
     );
     @include assert-equal(
       color(#fcc $adjust),
       #333,
       'Handles multiple arguments to color-adjustment function'
+    );
+  }
+
+  @include it('Works with a custom palette') {
+    $my-palette: (
+      'my-base': #393,
+      'my-adjustment': 'my-base' ('shade': 10%),
+    );
+
+    $expect: map-get($my-palette, 'my-base');
+    $expect: shade($expect, 10%);
+
+    @include assert-equal(
+      color('my-adjustment', $my-palette),
+      $expect
     );
   }
 }
