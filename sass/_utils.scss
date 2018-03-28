@@ -71,16 +71,11 @@
   $function
 ) {
   $type: type-of($function);
-  $local: ('tint', 'shade');
 
   @if ($type == 'function') {
     @return $function;
   } @else if ($type == 'string') and function-exists('get-function') {
-    @if index($local, $function) {
-      @return get-function($function);
-    }
-
-    @error '[#{$type}] `#{$function}` must be a first-class function';
+    @return get-function($function);
   }
 
   @return $function;
