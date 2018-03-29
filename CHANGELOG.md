@@ -1,6 +1,11 @@
 Accoutrement-Color Changelog
 ============================
 
+2.2.3 - 03/28/18
+----------------
+- BUGFIX: Support first-class functions (Sass 3.5+)
+
+
 2.2.2 - 09/22/17
 ----------------
 - BUGFIX: `color` function no longer chokes on self-reference in custom-palettes
