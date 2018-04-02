@@ -1,7 +1,7 @@
 Accoutrement-Color Changelog
 ============================
 
-2.2.3 - 03/28/18
+2.2.3 - 04/02/18
 ----------------
 - BUGFIX: Support first-class functions (Sass 3.5+)
 
