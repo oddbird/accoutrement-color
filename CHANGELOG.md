@@ -1,8 +1,8 @@
 Accoutrement-Color Changelog
 ============================
 
-2.3.0 - UNRELEASED
-------------------
+2.3.0 - 04/03/18
+----------------
 - NEW: `$functions` map allows you to name/capture first-class functions
   in the latest versions of Sass, and call them by name in the `$colors` map
 

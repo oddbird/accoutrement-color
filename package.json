@@ -1,7 +1,7 @@
 {
   "name": "accoutrement-color",
   "title": "Accoutrement: Color",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Sass color-palette management and utilities.",
   "homepage": "http://oddbird.net/accoutrement-color/",
   "repository": {
