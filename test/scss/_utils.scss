@@ -31,11 +31,11 @@
 // Get Function [function]
 // -----------------------
 @include describe('Get Function [function]') {
-  $test: _ac-color-get-function('color');
-  $expect: 'color';
+  $test: _ac-color-get-function('tint');
+  $expect: 'tint';
 
   @if function-exists('get-function') {
-    $expect: get-function('color');
+    $expect: get-function('tint');
 
     @include it('Functions are returned without change') {
       @include assert-equal(
@@ -51,8 +51,8 @@
 
   @include it('Returned function or name is callable') {
     @include assert-equal(
-      call($test, 'blue'),
-      color('blue')
+      call($test, 'blue', 100%),
+      white
     );
   }
 }

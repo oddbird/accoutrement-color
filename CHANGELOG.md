@@ -1,6 +1,12 @@
 Accoutrement-Color Changelog
 ============================
 
+2.3.0 - UNRELEASED
+------------------
+- NEW: `$functions` map allows you to name/capture first-class functions
+  in the latest versions of Sass, and call them by name in the `$colors` map
+
+
 2.2.3 - 04/02/18
 ----------------
 - BUGFIX: Support first-class functions (Sass 3.5+)
@@ -8,7 +14,8 @@ Accoutrement-Color Changelog
 
 2.2.2 - 09/22/17
 ----------------
-- BUGFIX: `color` function no longer chokes on self-reference in custom-palettes
+- BUGFIX: `color` function no longer chokes on self-reference
+  in custom-palettes
 
 
 2.2.1 - 09/13/17

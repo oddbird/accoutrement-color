@@ -1,5 +1,5 @@
-// Color Utilities
-// ===============
+/// # Tint & Shade Utilities
+/// @group util
 
 
 // Tint
@@ -71,13 +71,20 @@
   $function
 ) {
   $type: type-of($function);
-  $local: ('tint', 'shade');
 
   @if ($type == 'function') {
     @return $function;
-  } @else if ($type == 'string') and function-exists('get-function') {
-    @if index($local, $function) {
+  }
+
+  @if function-exists('get-function') {
+    // sass-lint:disable variable-name-format
+    @if index($_LOCAL-COLOR-FUNCTIONS, $function) {
       @return get-function($function);
+    }
+
+    @if map-has-key($functions, $function) {
+      $function: map-get($functions, $function);
+      @return _ac-scale-get-function($function);
     }
 
     @error '[#{$type}] `#{$function}` must be a first-class function';

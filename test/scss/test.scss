@@ -4,6 +4,13 @@
 @import '../../node_modules/sass-true/sass/true';
 @import '../../sass/color';
 
+@if function-exists('get-function') {
+  $functions: (
+    'desaturate': get-function('desaturate'),
+    'rgba': get-function('rgba'),
+    'adjust-hue': get-function('adjust-hue'),
+  ) !global;
+}
 
 $colors: (
   'blue': hsl(195, 85%, 62%),
@@ -12,9 +19,9 @@ $colors: (
 
   'simple': #969,
   'primary': 'red',
-  'secondary': 'primary' (tint: 30%, desaturate: 25%),
-  'alpha': 'simple' (rgba: 0.5),
-  'wtf': 'secondary' (adjust-hue: 24deg),
+  'secondary': 'primary' ('tint': 30%, 'desaturate': 25%),
+  'alpha': 'simple' ('rgba': 0.5),
+  'wtf': 'secondary' ('adjust-hue': 24deg),
   'hello': 'simple',
 
   'dark': #111,

@@ -7,12 +7,29 @@ display:
     - public
 
 groups:
-  a-config: Configuration
-  colors: Accessing Colors
-  contrast: Contrast Utilities
-  util: Tint & Shade
+  'Public API':
+    a-config: Configuration
+    colors: Accessing Colors
+    contrast: Contrast Utilities
+    util: Tint & Shade
 
 herman:
   sass:
     includepaths: ['sass']
     includes: ['color']
+  extraDocs:
+    - name: 'Changelog'
+      path: CHANGELOG.md
+    - name: 'Contributing'
+      path: CONTRIBUTING.md
+    - name: 'MIT License'
+      path: LICENSE
+  extraLinks:
+    - name: 'Accoutrement Init'
+      url: 'http://oddbird.net/accoutrement-init/'
+    - name: 'Accoutrement Layout'
+      url: 'http://oddbird.net/accoutrement-layout/'
+    - name: 'Accoutrement Scale'
+      url: 'http://oddbird.net/accoutrement-scale/'
+    - name: 'Accoutrement Type'
+      url: 'http://oddbird.net/accoutrement-type/'

@@ -1,5 +1,5 @@
-// Color Contrast
-// ==============
+/// # Managing Contrast & Accessibility
+/// @group contrast
 
 
 // WCAG Contrast
@@ -211,10 +211,13 @@ $WCAG-CONTRAST: ( // sass-lint:disable-line variable-name-format
   }
 
   @each $component in 'red' 'green' 'blue' {
-    @if (function-exists('get-function')) {
-      $component: get-function($component);
+    $function: $component;
+
+    @if function-exists('get-function') {
+      $function: get-function($component);
     }
-    $value: call($component, $color) / 255;
+
+    $value: call($function, $color) / 255;
 
     @if ($value < 0.03928) {
       $value: $value / 12.92;

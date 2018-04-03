@@ -1,1 +1,794 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>accoutrement-color Documentation</title><link href="assets/img/favicon.ico" rel="shortcut icon"><link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet"><link rel="stylesheet" href="assets/css/main.css"></head><body><svg xmlns="http://www.w3.org/2000/svg" hidden><symbol id="icon-menu" viewBox="0 0 24 28"><title>menu icon</title><path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/></symbol><symbol id="icon-search" viewBox="0 0 24 28"><title>search icon</title><path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/></symbol></svg><div data-sassdoc-region="app"><header role="banner" data-sassdoc-region="banner"><button data-nav-toggle="small" data-toggle="button" aria-controls="nav-small" aria-pressed="false" data-toggle-synced="false"><svg data-icon="menu" data-icon-size="icon-small"><title>menu</title><use xlink:href="#icon-menu"/></svg></button> <button data-nav-toggle="large" data-toggle="button" aria-controls="nav-large" aria-pressed="true" data-toggle-synced="false"><svg data-icon="menu" data-icon-size="icon-small"><title>menu</title><use xlink:href="#icon-menu"/></svg></button><h1 data-sassdoc="project-title"><a href="index.html" rel="home" data-sassdoc="project-name">accoutrement-color</a> <span data-sassdoc="project-version">2.2.3</span></h1></header><div data-sassdoc-region="container"><nav role="navigation" data-nav-menu="small" data-toggle="target" id="nav-small" data-target-id="nav-small" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false"><h3 data-sassdoc="nav-title"><a href="index.html" data-sassdoc-nav="is-not-active">accoutrement-color</a></h3><ul><li data-sassdoc="nav-item"><a href="a-config.html" data-sassdoc-nav="is-not-active">Configuration</a></li><li data-sassdoc="nav-item"><a href="colors.html" data-sassdoc-nav="is-not-active">Accessing Colors</a></li><li data-sassdoc="nav-item"><a href="contrast.html" data-sassdoc-nav="is-not-active">Contrast Utilities</a></li><li data-sassdoc="nav-item"><a href="util.html" data-sassdoc-nav="is-active">Tint &amp; Shade</a></li></ul></nav><nav role="navigation" data-nav-menu="large" data-toggle="target" id="nav-large" data-target-id="nav-large" aria-expanded="true" data-auto-closing="false" data-auto-closing-on-any-click="false"><h3 data-sassdoc="nav-title"><a href="index.html" data-sassdoc-nav="is-not-active">accoutrement-color</a></h3><ul><li data-sassdoc="nav-item"><a href="a-config.html" data-sassdoc-nav="is-not-active">Configuration</a></li><li data-sassdoc="nav-item"><a href="colors.html" data-sassdoc-nav="is-not-active">Accessing Colors</a></li><li data-sassdoc="nav-item"><a href="contrast.html" data-sassdoc-nav="is-not-active">Contrast Utilities</a></li><li data-sassdoc="nav-item"><a href="util.html" data-sassdoc-nav="is-active">Tint &amp; Shade</a></li></ul></nav><main role="main"><nav data-sassdoc-region="breadcrumb"><a href="index.html">accoutrement-color</a> » <strong>Tint &amp; Shade</strong></nav><div data-sassdoc-region="main" data-sassdoc-page="util"><section class="item" id="function--tint"><header data-item-section="header"><h2 class="item-title"><span class="item-type">@function</span> <a href="#function--tint" class="item-name">tint()</a></h2></header><div data-item-section="summary"><h3 class="item-subtitle">Description</h3><div class="text-block"><p>Mix a color with <code>white</code> to get a lighter tint.</p></div></div><div data-item-section="parameter"><h3 class="item-subtitle">Parameters &amp; Return</h3><div class="param-list"><h4 class="param-title"><span class="item-name">$color:</span> <span class="value-type">(String | list)</span></h4><div class="param-details text-block"><p>The name of a color in your palette, with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p></div></div><div class="param-list"><h4 class="param-title"><span class="item-name">$percentage:</span> <span class="value-type">(Percentage)</span></h4><div class="param-details text-block"><p>The percentage of white to mix in. Higher percentages will result in a lighter tint.</p></div></div><div class="param-list"><h4 class="param-title"><span class="item-name">@return</span> <span class="value-type">(Color)</span></h4><div class="param-details text-block"><p>A calculated css-ready color-value based on your global color palette.</p></div></div></div><div data-item-section="requires"><h3 class="item-subtitle">requires</h3><div class="param-list"><h4 class="param-title"><span class="item-type">@function</span> <a href="colors.html#function--color" class="item-name">color()</a></h4></div></div></section><section class="item" id="function--shade"><header data-item-section="header"><h2 class="item-title"><span class="item-type">@function</span> <a href="#function--shade" class="item-name">shade()</a></h2></header><div data-item-section="summary"><h3 class="item-subtitle">Description</h3><div class="text-block"><p>Mix a color with <code>black</code> to get a darker shade.</p></div></div><div data-item-section="parameter"><h3 class="item-subtitle">Parameters &amp; Return</h3><div class="param-list"><h4 class="param-title"><span class="item-name">$color:</span> <span class="value-type">(String | list)</span></h4><div class="param-details text-block"><p>The name of a color in your palette, with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p></div></div><div class="param-list"><h4 class="param-title"><span class="item-name">$percentage:</span> <span class="value-type">(Percentage)</span></h4><div class="param-details text-block"><p>The percentage of black to mix in. Higher percentages will result in a darker shade.</p></div></div><div class="param-list"><h4 class="param-title"><span class="item-name">@return</span> <span class="value-type">(Color)</span></h4><div class="param-details text-block"><p>A calculated css-ready color-value based on your global color palette.</p></div></div></div><div data-item-section="requires"><h3 class="item-subtitle">requires</h3><div class="param-list"><h4 class="param-title"><span class="item-type">@function</span> <a href="colors.html#function--color" class="item-name">color()</a></h4></div></div></section></div></main></div></div><script type="text/javascript" src="assets/js/jquery-3.1.1.slim.js"></script><script type="text/javascript" src="assets/js/srcdoc-polyfill.min.js"></script><script type="text/javascript" src="assets/js/highlight.js"></script><script type="text/javascript" src="assets/js/base.js"></script><script type="text/javascript" src="assets/js/init.js"></script></body></html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <title>Tint &amp; Shade | Accoutrement: Color Documentation</title>
+
+  <link href="assets/img/favicon.ico" rel="shortcut icon">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/webpack/app_styles.min.css" />
+
+  
+
+  
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" hidden>
+  <symbol id="icon-logo" viewBox="0 0 16 16">
+    <path d="M.2 8L0 7.8v-.2C.8 6.9 1.9 5.9 2.7 5l.4.3c-.5.8-1.1 1.6-1.8 2.3 1 1.2 1 1.3 1.7 2.4l-.4.3c-.4-.4-.5-.6-1-1C1 8.6 1.1 8.7.2 8zM13 10c.6-1.1.7-1.1 1.7-2.4-.6-.6-1.3-1.5-1.7-2.3l.3-.3c.8.8 1.8 1.8 2.7 2.6v.2l-.8.7c-.3.3-1.2 1.1-1.8 1.7L13 10z"/><path d="M2.6 13.1H3c.9 0 1.1-.2 1.1-1.4V4.2c0-1.1-.2-1.4-1.1-1.4h-.4v-.6h4.5v.7h-.3c-.9 0-1.1.2-1.1 1.4v3.2h4.6V4.2c0-1.1-.2-1.4-1.1-1.4h-.3v-.6h4.5v.7H13c-.9 0-1.1.2-1.1 1.4v7.5c0 1.1.2 1.4 1.1 1.4h.4v.7H8.9v-.7h.3c.9 0 1.1-.2 1.1-1.4V8.2H5.7v3.5c0 1.1.2 1.4 1.1 1.4h.3v.7H2.6v-.7z"/>
+  </symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 28">
+    <path d="M24 21v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1v-2c0-.547.453-1 1-1h22c.547 0 1 .453 1 1zm0-8v2c0 .547-.453 1-1 1H1c-.547 0-1-.453-1-1V5c0-.547.453-1 1-1h22c.547 0 1 .453 1 1z"/>
+  </symbol>
+</svg>
+
+  <div data-region="app">
+    <header data-region="banner">
+      
+  <button data-nav-toggle data-toggle="button" aria-controls="nav" aria-pressed="false" type="button" data-toggle-synced="false">
+    
+  <svg data-icon="menu" data-icon-size="nav-icon" ><title>menu</title><use xlink:href="#icon-menu" />
+  </svg>
+
+  </button>
+
+
+      <div class="project-title">
+        <a href="index.html" rel="home" class="project-name">Accoutrement: Color</a>
+        
+          <span class="project-version">2.2.3</span>
+        
+      </div>
+    </header>
+
+    <div data-region="container">
+      
+  <nav data-region="nav" data-toggle="target" id="nav" data-target-id="nav" aria-expanded="false" data-auto-closing="false" data-auto-closing-on-any-click="false">
+    <form action="search.html">
+      <input type="text" name="q" placeholder="Search…" required minlength="3">
+    </form>
+
+    <div class="nav-subsection">
+      <h3 class="nav-home">
+        
+        <a href="index.html" data-nav="is-not-active">Accoutrement: Color</a>
+      </h3>
+
+      
+      
+        <ul>
+          
+            
+            <li class="nav-item">
+              <a href="CHANGELOG.html" data-nav="is-not-active">Changelog</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="CONTRIBUTING.html" data-nav="is-not-active">Contributing</a>
+            </li>
+          
+            
+            <li class="nav-item">
+              <a href="LICENSE.html" data-nav="is-not-active">MIT License</a>
+            </li>
+          
+        </ul>
+      
+    </div>
+
+    
+    <div class="nav-subsection">
+      <ul>
+            <li class="nav-subsection">
+              <h3 class="nav-title">Public API</h3>
+              <ul>
+                
+  
+    <li class="nav-item">
+      <a href="a-config.html" data-nav="is-not-active">Configuration</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="colors.html" data-nav="is-not-active">Accessing Colors</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="contrast.html" data-nav="is-not-active">Contrast Utilities</a>
+    </li>
+  
+  
+    <li class="nav-item">
+      <a href="util.html" data-nav="is-active">Tint &amp;<span class="widont">&nbsp;</span>Shade</a>
+    </li>
+  </ul>
+            </li></ul>
+    </div>
+
+    
+    
+      <div class="nav-subsection">
+        <h3 class="nav-title">
+          External Links
+        </h3>
+
+        <ul>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/accoutrement-init/" data-nav="is-not-active">Accoutrement Init</a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/accoutrement-layout/" data-nav="is-not-active">Accoutrement Layout</a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/accoutrement-scale/" data-nav="is-not-active">Accoutrement Scale</a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="http://oddbird.net/accoutrement-type/" data-nav="is-not-active">Accoutrement Type</a>
+            </li>
+          
+        </ul>
+      </div>
+    
+
+    
+      <aside class="footer-credit">
+        <a href="http://oddbird.net/herman/" class="footer-icon">
+          
+  <svg data-icon="logo" data-icon-size="footer-logo" ><use xlink:href="#icon-logo" />
+  </svg>
+
+        </a>
+        <span>
+          Documented with
+          <a href="http://oddbird.net/herman/" class="footer-link">
+            Herman
+          </a>
+        </span>
+        <span>
+          by
+          <a href="http://oddbird.net/" class="footer-link">
+            OddBird
+          </a>
+        </span>
+      </aside>
+    
+  </nav>
+
+
+      <main data-region="main">
+        
+  <nav class="breadcrumb">
+    
+    <a href="index.html" >Accoutrement: Color</a> »
+    <strong>Tint &amp; Shade</strong>
+  </nav>
+
+
+        <div data-page="util">
+          
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" >
+  
+    
+  
+  
+  
+  
+
+  
+    <div data-item-section="prose" class="text-block">
+      <h1 id="tint-shade-utilities">Tint &amp; Shade<span class="widont">&nbsp;</span>Utilities</h1>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--tint">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--tint" class="item-name">tint()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Mix a color with <code>white</code> to get a lighter<span class="widont">&nbsp;</span>tint.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(String |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a color in your palette,
+with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$percentage:</span>
+      
+      
+      <span class="value-type">(Percentage)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The percentage of white to mix in.
+Higher percentages will result in a lighter<span class="widont">&nbsp;</span>tint.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(Color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  colors.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+<section class="item" id="function--shade">
+  
+    
+  
+  
+
+  
+  
+  
+  
+
+  <div data-item-section="header">
+    <h2 class="item-title">
+      
+        <span class="item-type">@function</span>
+      
+
+      
+        <a href="#function--shade" class="item-name">shade()</a>
+      
+
+      
+
+      
+    </h2>
+
+    
+  
+
+
+    
+    
+  
+  
+  
+  
+
+  
+    <div class="text-block">
+      <p>Mix a color with <code>black</code> to get a darker<span class="widont">&nbsp;</span>shade.</p>
+
+      
+  
+
+      
+  
+
+      
+  
+
+    </div>
+  
+
+  </div>
+
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    
+  <div data-item-section="parameter">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Parameters &amp;<span class="widont">&nbsp;</span>Return</span>
+        
+      </h3>
+    
+
+    
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$color:</span>
+      
+      
+      <span class="value-type">(String |<span class="widont">&nbsp;</span>list)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The name of a color in your palette,
+with optional adjustments in the form of <code>(&lt;function-name&gt;: &lt;args&gt;)</code>.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+        
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">$percentage:</span>
+      
+      
+      <span class="value-type">(Percentage)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>The percentage of black to mix in.
+Higher percentages will result in a darker<span class="widont">&nbsp;</span>shade.</p>
+
+      </div>
+    
+  </div>
+
+
+      
+
+      
+  
+
+      
+  
+    
+  <div class="param-list">
+    <h4 class="param-title">
+      
+      
+        <span class="item-name">@return</span>
+      
+      
+      <span class="value-type">(Color)</span>
+      
+    </h4>
+
+    
+      
+      <div class="param-details text-block">
+        <p>A calculated css-ready color-value based on your global color<span class="widont">&nbsp;</span>palette.</p>
+
+      </div>
+    
+  </div>
+
+  
+
+      
+  
+
+      
+  
+
+    
+  </div>
+
+  
+
+
+  
+  
+
+
+  
+  
+  
+  
+    
+    
+  <div data-item-section="requires">
+    
+      <h3 class="item-subtitle">
+        <span class="item-subtitle-main">Requires</span>
+        
+      </h3>
+    
+
+    
+      
+      
+        
+        
+        
+
+        
+          
+          
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <div class="param-list">
+    <h4 class="param-title">
+      <span class="item-type">@function</span>
+      
+        <a href="
+  colors.html#function--color" class="item-name">color()</a>
+      
+      
+      
+      
+    </h4>
+
+    
+  </div>
+
+
+        
+      
+    
+  </div>
+
+  
+    
+  
+
+  
+
+  
+  
+
+
+  
+  
+
+  
+  
+
+</section>
+
+  
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="assets/webpack/runtime.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/common.min.js"></script>
+  <script type="text/javascript" src="assets/webpack/app.min.js"></script>
+  
+</body>
+</html>

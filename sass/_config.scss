@@ -1,6 +1,47 @@
-// Color Config
-// ============
-// Configure and access your color palette.
+/// # Color Configuration
+/// @group a-config
+
+
+// Local Functions
+// ---------------
+/// These functions are defined internally,
+/// and can be called by name without first being captured
+/// using the Sass `get-function()` approach.
+///
+/// Don't make changes to this map directly.
+/// You can add your own named functions in the `$functions` map.
+///
+/// @access public
+/// @group a-config
+/// @see $functions
+///
+/// @type map
+$_LOCAL-COLOR-FUNCTIONS: ( // sass-lint:disable-line variable-name-format
+  'tint',
+  'shade',
+  'contrast',
+);
+
+
+// Functions
+// ---------
+/// Define any additional color functions required
+/// to generate relataionships in the `$colors` map.
+/// This is only necessary for newer versions of Sass,
+/// where functions are first-class,
+/// and can be captured using `get-function($name)`.
+///
+/// ```scss
+/// $functions: (
+///   'darken': get-function('darken'),
+///   'lighten': get-function('lighten'),
+/// );
+/// ```
+///
+/// @group a-config
+/// @type map
+/// @see $_LOCAL-COLOR-FUNCTIONS
+$functions: () !default;
 
 
 // Color Map
