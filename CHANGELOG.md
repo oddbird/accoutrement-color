@@ -1,6 +1,11 @@
 Accoutrement-Color Changelog
 ============================
 
+2.3.1 - 04/04/18
+----------------
+- BUGFIX: Fix typo in recursive `$function` lookup
+
+
 2.3.0 - 04/03/18
 ----------------
 - NEW: `$functions` map allows you to name/capture first-class functions
