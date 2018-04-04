@@ -84,7 +84,7 @@
 
     @if map-has-key($functions, $function) {
       $function: map-get($functions, $function);
-      @return _ac-scale-get-function($function);
+      @return _ac-color-get-function($function);
     }
 
     @error '[#{$type}] `#{$function}` must be a first-class function';
